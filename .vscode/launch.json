@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-Peja<Peja>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.archerprop.peja.Peja",
+      "projectName": "Peja",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

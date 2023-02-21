@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/user-style.css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="javascript/smooth-scroll.polyfills.min.js"></script>
+    <script>
+      var scroll = new SmoothScroll('a[href*="#"]');
+    </script>
+    <title>Portal de Estudio José de Alejandría</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <h1 class="logo"><a href="/admin.html">PEJA</a></h1>
+        <ul>
+          <li><a href="#" class="current">Inicio</a></li>
+          <li><a href="#tools">Herramientas</a></li>
+          <li><a href="/index.html">Salida</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="container">
+        <h1>Bienvenido</h1>
+        <p><q>Si haces planes para un año, siembra arroz. Si los haces por dos lustros, planta árboles. Si los haces para toda la vida, educa una persona.</q><br> Proverbio chino</p>
+      </div>
+    </div>
+
+    <section id="tools" class="container content">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Adicionar</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Tareas</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Estudiantes</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent" style="margin:30px 30px">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          creacion
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">lista</div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">estudiantes</div>
+      </div>
+    </section>
+    <script src="javascript/jquery-3.6.0.min.js"></script>
+    <script
+    src="/javascript/bootstrap.bundle.min.js"
+  ></script>
+    <script src="javascript/navbar.js"></script>
+
+  </body>
+</html>
