@@ -2,6 +2,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch ApplicationConfig",
+      "request": "launch",
+      "mainClass": "com.archerprop.peja.security.ApplicationConfig",
+      "projectName": "Peja"
+    },
+    {
+      "type": "java",
+      "name": "Launch WebSecurityConfig",
+      "request": "launch",
+      "mainClass": "com.archerprop.peja.security.WebSecurityConfig",
+      "projectName": "Peja"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-Peja<Peja>",
       "request": "launch",
       "cwd": "${workspaceFolder}",

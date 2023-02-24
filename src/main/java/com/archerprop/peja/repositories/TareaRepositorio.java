@@ -3,11 +3,8 @@ package com.archerprop.peja.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import com.archerprop.peja.entity.Tareas;
 
-@Repository
 public interface TareaRepositorio extends JpaRepository<Tareas, Long> {
 
     public abstract List<Tareas> findByNombre(String nombre);
