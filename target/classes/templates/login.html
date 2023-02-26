@@ -1,12 +1,12 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Portal de Estudio José de Alejandría</title>
 </head>
 <body>
@@ -15,10 +15,10 @@
             <img src="sources/images/img.jpg" th:src="@{/sources/images/img.jpg}" alt="imagen estudiante">
         </div>
         <div class="form-container sign-in-container">
-            <form th:action="@{/authenticates}" method="post" th:object="${user}">
+            <form th:action="@{/login}" method="post">
                 <h1>Ingreso</h1>
-                <input type="email" placeholder="Correo" name="correo"/>
-                <input type="password" placeholder="Contraseña" name="clave"/>
+                <input type="text" placeholder="Correo" name="username"/>
+                <input type="password" placeholder="Contraseña" name="password"/>
                 <button type="submit">Ingresar</button>
             </form>
         </div>
