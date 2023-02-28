@@ -28,10 +28,22 @@ public class RegistroUsuarioController {
         return "registro";
     }
 
-    @PostMapping
-    public String registrarUsuario(@ModelAttribute("usuario") UsuarioRegistroDTO RegistroDTO) {
-        usuarioService.guardar(RegistroDTO);
-        return "redirect:/registro?success";
+    @PostMapping("/admin")
+    public String registrarUsuarioA(@ModelAttribute("usuario") UsuarioRegistroDTO RegistroDTO) {
+        usuarioService.guardar(RegistroDTO, "ADMIN");
+        return "redirect:/index?success";
+    }
+
+    @PostMapping("/docente")
+    public String registrarUsuarioD(@ModelAttribute("usuario") UsuarioRegistroDTO RegistroDTO) {
+        usuarioService.guardar(RegistroDTO, "DOCENTE");
+        return "redirect:/index?success";
+    }
+
+    @PostMapping("/estudiante")
+    public String registrarUsuarioE(@ModelAttribute("usuario") UsuarioRegistroDTO RegistroDTO) {
+        usuarioService.guardar(RegistroDTO, "ESTUDIANTE");
+        return "redirect:/index?success";
     }
 
 }

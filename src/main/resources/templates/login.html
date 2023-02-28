@@ -15,12 +15,26 @@
             <img src="sources/images/img.jpg" th:src="@{/sources/images/img.jpg}" alt="imagen estudiante">
         </div>
         <div class="form-container sign-in-container">
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    Se ha registrado correctamente.
+                </div>
+            </div>
             <form th:action="@{/login}" method="post">
                 <h1>Ingreso</h1>
-                <input type="text" placeholder="Correo" name="username"/>
-                <input type="password" placeholder="Contraseña" name="password"/>
+                <input type="text" placeholder="Correo" name="username" required/>
+                <input type="password" placeholder="Contraseña" name="password" minlength="8" maxlength="12" id="password" required/>
                 <button type="submit">Ingresar</button>
+                <br>
+                <label for="connected" class="form-check-label">Ver clave</label>
+                <input
+                type="checkbox"
+                name="connected"
+                class="form-check-input"
+                onclick="mostrar()"
+              />
             </form>
+
         </div>
         <div class="overlay-container">
             <div class="overlay">
@@ -44,6 +58,17 @@
       title: "¡Error!",
       text: "Usuario o clave incorrecta.",
       icon: "error",
+      showConfirmButton: false,
+      timer: 2000,
+      toast: true,
+      position: "top-start",
+    });
+  </script>
+  <script th:if="${param.logout}">
+    Swal.fire({
+      title: "Hasta luego",
+      text: "Sesión cerrada correctamente.",
+      icon: "success",
       showConfirmButton: false,
       timer: 2000,
       toast: true,
