@@ -21,3 +21,24 @@ function mostrar() {
         tipo.type = "password";
     }
 }
+
+function validate(event) {
+    var email = document.getElementById("username").value;
+    // verificamos si el email es gmail
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(email)) {
+        return true;
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ingrese un correo valido',
+            toast: true,
+            position: 'top-start',
+            showConfirmButton: false,
+            timer: 1000,
+        });
+        event.preventDefault();
+        return false;
+    }
+}

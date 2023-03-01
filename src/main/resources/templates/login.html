@@ -15,14 +15,9 @@
             <img src="sources/images/img.jpg" th:src="@{/sources/images/img.jpg}" alt="imagen estudiante">
         </div>
         <div class="form-container sign-in-container">
-            <div th:if="${param.success}">
-                <div class="alert alert-info">
-                    Se ha registrado correctamente.
-                </div>
-            </div>
-            <form th:action="@{/login}" method="post">
+            <form th:action="@{/login}" method="post" onsubmit="validate(event)">
                 <h1>Ingreso</h1>
-                <input type="text" placeholder="Correo" name="username" required/>
+                <input type="text" placeholder="Correo" name="username" required id="username"/>
                 <input type="password" placeholder="Contraseña" name="password" minlength="8" maxlength="12" id="password" required/>
                 <button type="submit">Ingresar</button>
                 <br>
