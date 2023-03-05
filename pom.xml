@@ -82,6 +82,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.archerprop.peja.PejaApplication</mainClass>
+						</manifest>
+					</archive>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

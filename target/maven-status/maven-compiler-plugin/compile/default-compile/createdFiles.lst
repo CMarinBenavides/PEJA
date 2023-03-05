@@ -8,6 +8,8 @@ com\archerprop\peja\controller\LoginController.class
 com\archerprop\peja\security\webSecurityConfig.class
 com\archerprop\peja\dto\UsuarioRegistroDTO.class
 com\archerprop\peja\repository\RoleRepositorio.class
+com\archerprop\peja\security\webSecurityConfig$1.class
 com\archerprop\peja\entity\Rol.class
+com\archerprop\peja\controller\AdminController.class
 com\archerprop\peja\entity\Usuario.class
 com\archerprop\peja\service\Impl\UsuarioServiceImpl.class

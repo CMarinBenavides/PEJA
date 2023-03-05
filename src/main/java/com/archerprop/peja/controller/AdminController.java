@@ -35,7 +35,13 @@ public class AdminController {
     }
 
     @ModelAttribute("usuario")
+    public UsuarioRegistroDTO retornarNuevoUsuarioDTO() {
+        return new UsuarioRegistroDTO();
+    }
+
+    @ModelAttribute("usuarioregistro")
     public UsuarioRegistroDTO retornarNuevoUsuarioRegistroDTO() {
         return new UsuarioRegistroDTO();
     }
+
 }

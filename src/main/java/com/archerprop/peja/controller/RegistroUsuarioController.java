@@ -18,7 +18,7 @@ public class RegistroUsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @ModelAttribute("usuario")
+    @ModelAttribute("usuarioregistro")
     public UsuarioRegistroDTO retornarNuevoUsuarioRegistroDTO() {
         return new UsuarioRegistroDTO();
     }
@@ -29,21 +29,39 @@ public class RegistroUsuarioController {
     }
 
     @PostMapping("/admin")
-    public String registrarUsuarioA(@ModelAttribute("usuario") UsuarioRegistroDTO RegistroDTO) {
-        usuarioService.guardar(RegistroDTO, "ADMIN");
-        return "redirect:/index?success";
+    public String registrarUsuarioA(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO) {
+        try {
+            if (usuarioService.guardar(RegistroDTO, "ADMIN") != null) {
+                return "redirect:/admin?success";
+            }
+        } catch (Exception e) {
+            return "redirect:/admin?failure";
+        }
+        return "redirect:/admin?failure";
     }
 
     @PostMapping("/docente")
-    public String registrarUsuarioD(@ModelAttribute("usuario") UsuarioRegistroDTO RegistroDTO) {
-        usuarioService.guardar(RegistroDTO, "DOCENTE");
-        return "redirect:/index?success";
+    public String registrarUsuarioD(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO) {
+        try {
+            if (usuarioService.guardar(RegistroDTO, "DOCENTE") != null) {
+                return "redirect:/docente?success";
+            }
+        } catch (Exception e) {
+            return "redirect:/docente?failure";
+        }
+        return "redirect:/docente?failure";
     }
 
     @PostMapping("/estudiante")
-    public String registrarUsuarioE(@ModelAttribute("usuario") UsuarioRegistroDTO RegistroDTO) {
-        usuarioService.guardar(RegistroDTO, "ESTUDIANTE");
-        return "redirect:/index?success";
+    public String registrarUsuarioE(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO) {
+        try {
+            if (usuarioService.guardar(RegistroDTO, "ESTUDIANTE") != null) {
+                return "redirect:/estudiante?success";
+            }
+        } catch (Exception e) {
+            return "redirect:/estudiante?failure";
+        }
+        return "redirect:/estudiante?failure";
     }
 
 }
