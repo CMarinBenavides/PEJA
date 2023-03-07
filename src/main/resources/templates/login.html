@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Portal de Estudio José de Alejandría</title>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container image-container">
+            <img src="sources/images/img.jpg" th:src="@{/sources/images/img.jpg}" alt="imagen estudiante">
+        </div>
+        <div class="form-container sign-in-container">
+            <form th:action="@{/login}" method="post" onsubmit="validate(event)">
+                <h1>Ingreso</h1>
+                <input type="text" placeholder="Correo" name="username" required id="username"/>
+                <input type="password" placeholder="Contraseña" name="password" minlength="8" maxlength="12" id="password" required/>
+                <button type="submit">Ingresar</button>
+                <br>
+                <label for="connected" class="form-check-label">Ver clave</label>
+                <input
+                type="checkbox"
+                name="connected"
+                class="form-check-input"
+                onclick="mostrar()"
+              />
+            </form>
+
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Vuelve pronto!</h1>
+                    <p>En caso de que no recuerdes tu contraseña escribemos al correo: <br> soporte.portaldeestudio@gmail.com</p>
+                    <button class="ghost" id="signIn">Inicio</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Bienvenido</h1>
+                    <p>Siente libre de entrar al Portal de Estudio José de Alejandría</p>
+                    <button class="ghost" id="signUp">Ingresar</button>
+                </div>
+            </div>
+        </div>
+        </div>
+</body>
+<script src="javascript/sweetalert2.all.min.js" th:src="@{/javascript/sweetalert2.all.min.js}"></script>
+<script th:if="${param.error}">
+    Swal.fire({
+      title: "¡Error!",
+      text: "Usuario o clave incorrecta.",
+      icon: "error",
+      showConfirmButton: false,
+      timer: 2000,
+      toast: true,
+      position: "top-start",
+    });
+  </script>
+  <script th:if="${param.logout}">
+    Swal.fire({
+      title: "Hasta luego",
+      text: "Sesión cerrada correctamente.",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 2000,
+      toast: true,
+      position: "top-start",
+    });
+  </script>
+<script src="javascript/jquery-3.6.0.min.js" th:src="@{/javascript/jquery-3.6.0.min.js}"></script>
+<script src="javascript/main.js" th:src="@{/javascript/main.js}"></script>
+
+
+</html>
