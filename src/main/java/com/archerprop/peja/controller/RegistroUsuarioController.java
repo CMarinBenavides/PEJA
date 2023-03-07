@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.archerprop.peja.dto.UsuarioRegistroDTO;
 import com.archerprop.peja.service.UsuarioService;
+import com.archerprop.peja.entity.Usuario;
+import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -33,6 +35,20 @@ public class RegistroUsuarioController {
         try {
             if (usuarioService.guardar(RegistroDTO, "ADMIN") != null) {
                 return "redirect:/admin?success";
+            }
+        } catch (Exception e) {
+            return "redirect:/admin?failure";
+        }
+        return "redirect:/admin?failure";
+    }
+
+    @PostMapping("/admin/mod")
+    public String modificarUsuarioA(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO, Model model) {
+        try {
+            if (usuarioService.modificar(RegistroDTO, "ADMIN")) {
+                Usuario usuario = null;
+                model.addAttribute("usuarioregistro", usuario);
+                return "redirect:/admin?successChange";
             }
         } catch (Exception e) {
             return "redirect:/admin?failure";

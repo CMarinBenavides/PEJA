@@ -13,4 +13,10 @@ public interface UsuarioService extends UserDetailsService {
 
     public Usuario buscarUsuario(String correo);
 
+    public List<Usuario> listarUsuariosAdmin();
+
+    public boolean eliminar(Usuario usuarioDTO);
+
+    public boolean modificar(UsuarioRegistroDTO usuarioDTO, String rol);
+
 }

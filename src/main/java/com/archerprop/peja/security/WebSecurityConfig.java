@@ -36,7 +36,7 @@ public class webSecurityConfig {
                 })
                 .authorizeHttpRequests()
                 .requestMatchers("/javascript/**", "/css/**", "/sources/**").permitAll()
-                .requestMatchers("/admin/*").hasAnyRole("ADMIN", "SUPERADMIN")
+                .requestMatchers("/admin/*/*/*").hasAnyRole("ADMIN", "SUPERADMIN")
                 .requestMatchers("/user/*").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()

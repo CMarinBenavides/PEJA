@@ -21,7 +21,7 @@ import jakarta.persistence.JoinTable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = "correo"))
+@Table(name = "usuarios")
 @Entity
 public class Usuario {
 
