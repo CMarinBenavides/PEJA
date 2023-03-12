@@ -90,7 +90,7 @@
                             </div>
                         </div>
                           <p class="text-center fs-2">Formulario de registro</p>
-                            <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}" th:if="${param.successChange}">
+                            <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == false" onsubmit="validate(event)">
                               <div class="form-floating mb-3">
                                 <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" >
                                 <label for="cedula">Cedula</label>
@@ -117,7 +117,7 @@
                               </div>
                             </form>
 
-                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioregistro}" th:if="${param.successChange} == null">
+                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == true" onsubmit="validate(event)">
                             <div class="form-floating mb-3">
                               <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" >
                               <label for="cedula">Cedula</label>
@@ -135,7 +135,7 @@
                                 <label for="correo">Correo</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus">
+                                <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12">
                                 <label for="clave">Clave</label>
                             </div>
                             <br>
@@ -182,8 +182,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script
     src="/javascript/bootstrap.bundle.min.js"
+    th:src="@{/javascript/bootstrap.bundle.min.js}"
   ></script>
-    <script src="javascript/navbar.js"></script>
-
+    <script src="javascript/navbar.js" th:src="@{/javascript/navbar.js}"></script>
+    <script src="javascript/main.js" th:src="@{/javascript/main.js}"></script>
   </body>
 </html>

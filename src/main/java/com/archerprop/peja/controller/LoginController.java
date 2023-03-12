@@ -19,7 +19,8 @@ public class LoginController {
     @GetMapping("/index")
     public String index(Authentication authentication) {
 
-        if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("SUPERADMIN"))) {
+        if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("SUPERADMIN"))
+                || authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ADMIN"))) {
             return "redirect:/admin";
         }
         if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("USER"))) {

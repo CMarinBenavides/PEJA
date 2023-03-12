@@ -48,6 +48,7 @@ public class RegistroUsuarioController {
             if (usuarioService.modificar(RegistroDTO, "ADMIN")) {
                 Usuario usuario = null;
                 model.addAttribute("usuarioregistro", usuario);
+                model.addAttribute("modificar", false);
                 return "redirect:/admin?successChange";
             }
         } catch (Exception e) {

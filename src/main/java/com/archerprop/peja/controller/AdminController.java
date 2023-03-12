@@ -33,6 +33,7 @@ public class AdminController {
         List<Usuario> usuarios = usuarioService.listarUsuariosAdmin();
         model.addAttribute("usuario", usuario);
         model.addAttribute("usuariosAdmin", usuarios);
+        model.addAttribute("modificar", false);
 
         return "admin";
     }
@@ -51,6 +52,7 @@ public class AdminController {
     public String modificarUsuario(@PathVariable String correo, Model model) {
         Usuario usuario = usuarioService.buscarUsuario(correo);
         model.addAttribute("usuarioregistro", usuario);
+        model.addAttribute("modificar", true);
         return "admin";
     }
 
