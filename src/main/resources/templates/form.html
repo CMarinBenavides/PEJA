@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
+<head> <!--Se definen los cuerpos del documento, incluida la codificación de caracteres, la compatibilidad con IE y el viewport para dispositivos móviles-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,9 +16,9 @@
                         Se ha registrado correctamente.
                     </div>
                 </div>
-                <h1>Formulario de registro</h1>
+                <h1>Formulario de registro</h1> <!--Se define el título del documento-->
                 <form th:action="@{/registro}" method="post" th:object="${usuario}">
-                    <div class="form-group">
+                    <div class="form-group"> <!--Se crea formulario con cada uno de los siguientes id´s-->
                         <label for="cedula">Id</label>
                         <input type="number" class="form-control" id="cedula" th:field="*{cedula}" required autofocus="autofocus">
                     </div>
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button> <!--Se define un botón de tipo "submit" para enviar el formulario-->
                     </div>
                 </form>
             </div>

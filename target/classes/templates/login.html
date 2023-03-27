@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
+<head> <!--Contiene información sobre la página, como el título y los enlaces a los archivos CSS y JS.-->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!--Compatibilidad de Internet Explorer-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Portal de Estudio José de Alejandría</title>
@@ -12,10 +12,11 @@
 <body>
     <div class="container" id="container">
         <div class="form-container image-container">
-            <img src="sources/images/img.jpg" th:src="@{/sources/images/img.jpg}" alt="imagen estudiante">
+            <img src="sources/images/img.jpg" th:src="@{/sources/images/img.jpg}" alt="imagen estudiante"> <!--Se crea una etiqueta de imagen con una ruta de origen de la imagen y un atributo alt para la imagen-->
         </div>
         <div class="form-container sign-in-container">
             <form th:action="@{/login}" method="post" onsubmit="validate(event)">
+		<!--Se crea el ingreso con lo requerido, creando botones de ingreso-->
                 <h1>Ingreso</h1>
                 <input type="text" placeholder="Correo" name="username" required id="username"/>
                 <input type="password" placeholder="Contraseña" name="password" minlength="8" maxlength="12" id="password" required/>
@@ -27,14 +28,14 @@
                 name="connected"
                 class="form-check-input"
                 onclick="mostrar()"
-              />
+                />
             </form>
 
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Vuelve pronto!</h1>
+                    <h1>Vuelve pronto!</h1> <!--Se proporciona información sobre cómo recuperar una contraseña si se olvida-->
                     <p>En caso de que no recuerdes tu contraseña escribemos al correo: <br> soporte.portaldeestudio@gmail.com</p>
                     <button class="ghost" id="signIn">Inicio</button>
                 </div>
@@ -48,7 +49,7 @@
         </div>
 </body>
 <script src="javascript/sweetalert2.all.min.js" th:src="@{/javascript/sweetalert2.all.min.js}"></script>
-<script th:if="${param.error}">
+<script th:if="${param.error}"> <!--Es una declaración condicional que verifica si el parámetro "error" está presente en la URL. Si es así, se ejecuta el script dentro de la declaración if, lo que crea una ventana emergente de Swal2 con un mensaje de error-->
     Swal.fire({
       title: "¡Error!",
       text: "Usuario o clave incorrecta.",
@@ -61,6 +62,7 @@
   </script>
   <script th:if="${param.logout}">
     Swal.fire({
+	<!--Aqui se encuentra una declaración condicional que verifica si el parámetro "cerrar sesión" está presente en la URL. Si es así, se ejecuta el script dentro de la declaración if, lo que crea una ventana emergente Swal2 con un mensaje de éxito-->
       title: "Hasta luego",
       text: "Sesión cerrada correctamente.",
       icon: "success",
