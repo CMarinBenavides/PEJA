@@ -1,0 +1,42 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch PejaApplication",
+      "request": "launch",
+      "mainClass": "com.archerprop.peja.PejaApplication",
+      "projectName": "Peja"
+    },
+    {
+      "type": "java",
+      "name": "Launch PejaApplication",
+      "request": "launch",
+      "mainClass": "com.archerprop.peja.PejaApplication",
+      "projectName": "peja"
+    },
+    {
+      "type": "java",
+      "name": "Launch ApplicationConfig",
+      "request": "launch",
+      "mainClass": "com.archerprop.peja.security.ApplicationConfig",
+      "projectName": "Peja"
+    },
+    {
+      "type": "java",
+      "name": "Launch WebSecurityConfig",
+      "request": "launch",
+      "mainClass": "com.archerprop.peja.security.WebSecurityConfig",
+      "projectName": "Peja"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Peja<Peja>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.archerprop.peja.Peja",
+      "projectName": "Peja",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
