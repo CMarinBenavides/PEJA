@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Peja {
 
     public static void main(String[] args) {
+        system.print.out("Test");
         SpringApplication.run(Peja.class, args);
     }
 }
