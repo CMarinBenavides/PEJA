@@ -9,3 +9,5 @@ function fixNav() {
         nav.classList.remove('active')// hace cambos en la funcón que manja el css. En este caso Remove.
     }
 } // la función "fixNav" cambia dinámicamente el estilo de un elemento de navegación en respuesta al desplazamiento vertical del usuario en la página, lo que le permite mantenerse visible y fijo en una posición específica de la página.
+
+print("Hola mundo");
