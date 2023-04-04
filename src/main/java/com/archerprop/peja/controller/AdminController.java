@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 import com.archerprop.peja.service.Impl.UsuarioServiceImpl;
+
 /**
  * Controlador para la funcionalidad de administrador
  */
@@ -27,9 +28,13 @@ public class AdminController {
 
     /**
      * Método que maneja la solicitud GET para la página de administración
-     * @param model objeto Model que se utiliza para agregar atributos a la vista
-     * @param principal objeto Principal que representa al usuario autenticado actualmente
-     * @return vista admin si el usuario está autenticado, de lo contrario redirige a la página de inicio de sesión
+     * 
+     * @param model     objeto Model que se utiliza para agregar atributos a la
+     *                  vista
+     * @param principal objeto Principal que representa al usuario autenticado
+     *                  actualmente
+     * @return vista admin si el usuario está autenticado, de lo contrario redirige
+     *         a la página de inicio de sesión
      */
     @GetMapping
     public String admin(Model model, Principal principal) {
@@ -42,12 +47,14 @@ public class AdminController {
         model.addAttribute("usuario", usuario);
         model.addAttribute("usuariosAdmin", usuarios);
         model.addAttribute("modificar", false);
-
+        System.out.println("Usuario: " + usuario.getCorreo());
         return "admin";
     }
 
     /**
-     * Método que devuelve un nuevo objeto UsuarioRegistroDTO para ser utilizado en la vista
+     * Método que devuelve un nuevo objeto UsuarioRegistroDTO para ser utilizado en
+     * la vista
+     * 
      * @return nuevo objeto UsuarioRegistroDTO
      */
     @ModelAttribute("usuario")
@@ -56,7 +63,9 @@ public class AdminController {
     }
 
     /**
-     * Método que devuelve un nuevo objeto UsuarioRegistroDTO para ser utilizado en la vista
+     * Método que devuelve un nuevo objeto UsuarioRegistroDTO para ser utilizado en
+     * la vista
+     * 
      * @return nuevo objeto UsuarioRegistroDTO
      */
     @ModelAttribute("usuarioregistro")
@@ -66,9 +75,11 @@ public class AdminController {
 
     /**
      * Método que maneja la solicitud GET para modificar un usuario
+     * 
      * @param correo correo electrónico del usuario a modificar
-     * @param model objeto Model que se utiliza para agregar atributos a la vista
-     * @return vista admin con el objeto UsuarioRegistroDTO correspondiente y la bandera "modificar" establecida en true
+     * @param model  objeto Model que se utiliza para agregar atributos a la vista
+     * @return vista admin con el objeto UsuarioRegistroDTO correspondiente y la
+     *         bandera "modificar" establecida en true
      */
     @GetMapping("/{correo}")
     public String modificarUsuario(@PathVariable String correo, Model model) {
@@ -80,9 +91,12 @@ public class AdminController {
 
     /**
      * Método que maneja la solicitud GET para eliminar un usuario
+     * 
      * @param correo correo electrónico del usuario a eliminar
-     * @param model objeto Model que se utiliza para agregar atributos a la vista
-     * @return redirige a la página admin con la bandera "successDelete" establecida si la eliminación fue exitosa, de lo contrario redirige a la página admin con la bandera "failure" establecida
+     * @param model  objeto Model que se utiliza para agregar atributos a la vista
+     * @return redirige a la página admin con la bandera "successDelete" establecida
+     *         si la eliminación fue exitosa, de lo contrario redirige a la página
+     *         admin con la bandera "failure" establecida
      */
     @GetMapping("/{correo}/delete")
     public String eliminarUsuario(@PathVariable String correo, Model model) {
@@ -90,7 +104,7 @@ public class AdminController {
         try {
             if (usuarioService.eliminar(usuarioR)) {
                 Usuario usuario = null;
-               model.addAttribute("usuarioregistro", usuario);
+                model.addAttribute("usuarioregistro", usuario);
                 return "redirect:/admin?successDelete";
             }
         } catch (Exception e) {

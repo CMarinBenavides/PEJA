@@ -14,7 +14,7 @@ import com.archerprop.peja.service.UsuarioService;
 
 @Configuration
 @EnableWebSecurity
-public class webSecurityConfig {
+public class WebSecurityConfig {
 
     @Autowired
 
