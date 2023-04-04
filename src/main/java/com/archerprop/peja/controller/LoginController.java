@@ -12,7 +12,7 @@ import com.archerprop.peja.dto.UsuarioRegistroDTO;
 public class LoginController {
 
     /**
-     * Controlador para la página de inicio de sesión.
+     * Controlador para la página de inicio de sesión. holaaaa
      *
      * @return la vista "login"
      */
