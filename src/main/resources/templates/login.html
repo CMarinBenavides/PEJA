@@ -4,7 +4,7 @@
 <head> <!--Contiene información sobre la página, como el título y los enlaces a los archivos CSS y JS.-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!--Compatibilidad de Internet Explorer-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Portal de Estudio José de Alejandría</title>
@@ -49,7 +49,8 @@
         </div>
 </body>
 <script src="javascript/sweetalert2.all.min.js" th:src="@{/javascript/sweetalert2.all.min.js}"></script>
-<script th:if="${param.error}"> <!--Es una declaración condicional que verifica si el parámetro "error" está presente en la URL. Si es así, se ejecuta el script dentro de la declaración if, lo que crea una ventana emergente de Swal2 con un mensaje de error-->
+<!-- Es una declaración condicional que verifica si el parámetro "error" está presente en la URL. Si es así, se ejecuta el script dentro de la declaración if, lo que crea una ventana emergente de Swal2 con un mensaje de error-->
+<script th:if="${param.error}">
     Swal.fire({
       title: "¡Error!",
       text: "Usuario o clave incorrecta.",
@@ -60,9 +61,9 @@
       position: "top-start",
     });
   </script>
+  <!--Aqui se encuentra una declaración condicional que verifica si el parámetro "cerrar sesión" está presente en la URL. Si es así, se ejecuta el script dentro de la declaración if, lo que crea una ventana emergente Swal2 con un mensaje de éxito-->
   <script th:if="${param.logout}">
     Swal.fire({
-	<!--Aqui se encuentra una declaración condicional que verifica si el parámetro "cerrar sesión" está presente en la URL. Si es así, se ejecuta el script dentro de la declaración if, lo que crea una ventana emergente Swal2 con un mensaje de éxito-->
       title: "Hasta luego",
       text: "Sesión cerrada correctamente.",
       icon: "success",

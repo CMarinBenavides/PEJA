@@ -15,6 +15,10 @@ public interface UsuarioService extends UserDetailsService {
 
     public List<Usuario> listarUsuariosAdmin();
 
+    public List<Usuario> listarUsuariosDocente();
+
+    public List<Usuario> listarUsuariosEstudiante();
+
     public boolean eliminar(Usuario usuarioDTO);
 
     public boolean modificar(UsuarioRegistroDTO usuarioDTO, String rol);

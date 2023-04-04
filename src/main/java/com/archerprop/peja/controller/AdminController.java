@@ -43,11 +43,15 @@ public class AdminController {
             return "redirect:/login";
         }
         Usuario usuario = usuarioService.buscarUsuario(principal.getName());
-        List<Usuario> usuarios = usuarioService.listarUsuariosAdmin();
+        List<Usuario> usuariosA = usuarioService.listarUsuariosAdmin();
+        List<Usuario> usuariosD = usuarioService.listarUsuariosDocente();
+        List<Usuario> usuariosE = usuarioService.listarUsuariosEstudiante();
         String rol = usuario.getRoles().iterator().next().getName();
         model.addAttribute("usuario", usuario);
         model.addAttribute("rol", rol);
-        model.addAttribute("usuariosAdmin", usuarios);
+        model.addAttribute("usuariosAdmin", usuariosA);
+        model.addAttribute("usuariosDocente", usuariosD);
+        model.addAttribute("usuariosEstudiante", usuariosE);
         model.addAttribute("modificar", false);
 
         return "admin";

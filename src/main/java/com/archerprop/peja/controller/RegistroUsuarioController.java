@@ -11,7 +11,9 @@ import com.archerprop.peja.service.UsuarioService;
 import com.archerprop.peja.entity.Usuario;
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.GetMapping;@Controller
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
 @RequestMapping("/registro")
 public class RegistroUsuarioController {
 
@@ -19,7 +21,8 @@ public class RegistroUsuarioController {
     private UsuarioService usuarioService;
 
     /**
-     * Retorna un nuevo objeto UsuarioRegistroDTO para ser utilizado en el formulario de registro.
+     * Retorna un nuevo objeto UsuarioRegistroDTO para ser utilizado en el
+     * formulario de registro.
      *
      * @return Un objeto UsuarioRegistroDTO vacío.
      */
@@ -41,7 +44,8 @@ public class RegistroUsuarioController {
     /**
      * Registra un usuario con el rol "ADMIN".
      *
-     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información del usuario a registrar.
+     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información
+     *                    del usuario a registrar.
      * @return Redirige a la página "admin" con un mensaje de éxito o fracaso.
      */
     @PostMapping("/admin")
@@ -59,8 +63,10 @@ public class RegistroUsuarioController {
     /**
      * Modifica un usuario con el rol "ADMIN".
      *
-     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información del usuario a modificar.
-     * @param model       El modelo que se utilizará para agregar atributos a la vista.
+     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información
+     *                    del usuario a modificar.
+     * @param model       El modelo que se utilizará para agregar atributos a la
+     *                    vista.
      * @return Redirige a la página "admin" con un mensaje de éxito o fracaso.
      */
     @PostMapping("/admin/mod")
@@ -81,7 +87,8 @@ public class RegistroUsuarioController {
     /**
      * Registra un usuario con el rol "DOCENTE".
      *
-     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información del usuario a registrar.
+     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información
+     *                    del usuario a registrar.
      * @return Redirige a la página "docente" con un mensaje de éxito o fracaso.
      */
     @PostMapping("/docente")
@@ -99,11 +106,12 @@ public class RegistroUsuarioController {
     /**
      * Registra un usuario con el rol "ESTUDIANTE".
      *
-     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información del usuario a registrar.
+     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información
+     *                    del usuario a registrar.
      * @return Redirige a la página "estudiante" con un mensaje de éxito o fracaso.
      */
     @PostMapping("/estudiante")
-public String registrarUsuarioE(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO) {
+    public String registrarUsuarioE(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO) {
         try {
             if (usuarioService.guardar(RegistroDTO, "ESTUDIANTE") != null) {
                 return "redirect:/estudiante?success";
