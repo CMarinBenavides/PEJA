@@ -81,6 +81,24 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public List<Usuario> listarUsuariosDocente() {
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<Usuario> usuariosDocente = usuarios.stream()
+                .filter(usuario -> usuario.getRoles().stream().anyMatch(rol -> rol.getName().equals("DOCENTE")))
+                .collect(Collectors.toList());
+        return usuariosDocente;
+    }
+
+    @Override
+    public List<Usuario> listarUsuariosEstudiante() {
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<Usuario> usuariosEstudiante = usuarios.stream()
+                .filter(usuario -> usuario.getRoles().stream().anyMatch(rol -> rol.getName().equals("ESTUDIANTE")))
+                .collect(Collectors.toList());
+        return usuariosEstudiante;
+    }
+
+    @Override
     @Transactional
     public boolean eliminar(Usuario registroDTO) {
         try {

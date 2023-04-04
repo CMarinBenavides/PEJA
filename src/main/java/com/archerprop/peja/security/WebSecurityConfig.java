@@ -14,7 +14,7 @@ import com.archerprop.peja.service.UsuarioService;
 
 @Configuration
 @EnableWebSecurity
-public class webSecurityConfig {
+public class WebSecurityConfig {
 
     @Autowired
 
@@ -34,6 +34,9 @@ public class webSecurityConfig {
                         setPasswordEncoder(passwordEncoder());
                     }
                 })
+                .csrf().disable()
+                .httpBasic()
+                .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/javascript/**", "/css/**", "/sources/**").permitAll()
                 .requestMatchers("/admin/*/*/*").hasAnyRole("ADMIN", "SUPERADMIN")
