@@ -29,7 +29,7 @@ public class LoginController {
      * @param authentication objeto de autenticación de Spring Security
      * @return la vista correspondiente según el tipo de usuario
      */
-    @GetMapping("/index")
+    @GetMapping("/home")
     public String index(Authentication authentication) {
 
         if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("SUPERADMIN"))

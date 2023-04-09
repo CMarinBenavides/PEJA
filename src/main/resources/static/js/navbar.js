@@ -1,4 +1,3 @@
-$.getScript("jquery-3.6.0.min.js"); //cargar la librería de jQuery.
 const nav = document.querySelector('.nav') // se guarda en una variable constante nav con un atributo obtenido del HTML. Esto depende del atributo que tenga el identificar .nav
 window.addEventListener('scroll', fixNav) //está permitiendo agregar un efecto de "scroll" fijo a un elemento de navegación en una página web.
 

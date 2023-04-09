@@ -1,5 +1,3 @@
-$.getScript("jquery-3.6.0.min.js"); //cargar la librería de jQuery.
-
 const signUpButton = document.getElementById('signUp');//seleccionando un botón del DOM, asignándolo a una constante y añadiendo un evento "click" al botón para manipular un contenedor en la página; es para registrarse.
 const signInButton = document.getElementById('signIn');//seleccionando un botón del DOM, asignándolo a una constante y añadiendo un evento "click" al botón para manipular un contenedor en la página; es para iniciar sesión.
 const container = document.getElementById('container');// está seleccionando un contenedor del DOM, asignándolo a una constante y añadiendo eventos "click" a dos botones para manipular el contenedor en la página.

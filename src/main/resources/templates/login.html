@@ -48,7 +48,7 @@
         </div>
         </div>
 </body>
-<script src="javascript/sweetalert2.all.min.js" th:src="@{/javascript/sweetalert2.all.min.js}"></script>
+<script src="js/sweetalert2.all.min.js" th:src="@{/js/sweetalert2.all.min.js}"></script>
 <!-- Es una declaración condicional que verifica si el parámetro "error" está presente en la URL. Si es así, se ejecuta el script dentro de la declaración if, lo que crea una ventana emergente de Swal2 con un mensaje de error-->
 <script th:if="${param.error}">
     Swal.fire({
@@ -73,8 +73,8 @@
       position: "top-start",
     });
   </script>
-<script src="javascript/jquery-3.6.0.min.js" th:src="@{/javascript/jquery-3.6.0.min.js}"></script>
-<script src="javascript/main.js" th:src="@{/javascript/main.js}"></script>
+<script src="js/jquery-3.6.4.min.js" th:src="@{/js/jquery-3.6.4.min.js}"></script>
+<script src="js/main.js" th:src="@{/js/main.js}"></script>
 
 
 </html>

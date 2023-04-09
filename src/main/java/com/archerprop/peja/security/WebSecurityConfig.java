@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.archerprop.peja.service.UsuarioService;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -27,33 +29,28 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authenticationProvider(new DaoAuthenticationProvider() {
-                    {
-                        setUserDetailsService(usuarioService);
-                        setPasswordEncoder(passwordEncoder());
-                    }
-                })
-                .csrf().disable()
-                .httpBasic()
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/javascript/**", "/css/**", "/sources/**").permitAll()
-                .requestMatchers("/admin/*/*/*").hasAnyRole("ADMIN", "SUPERADMIN")
-                .requestMatchers("/user/*").hasRole("USER")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/index", true)
-                .permitAll()
-                .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .permitAll();
+        http.authenticationProvider(new DaoAuthenticationProvider() {
+            {
+                setPasswordEncoder(passwordEncoder());
+                setUserDetailsService(usuarioService);
+            }
+        })
+                .csrf(withDefaults())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/js/**", "/css/**", "/sources/**").permitAll()
+                        .requestMatchers("/admin/*").hasAnyAuthority("ADMIN", "SUPERADMIN")
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .anyRequest().authenticated())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll());
         return http.build();
     }
 
