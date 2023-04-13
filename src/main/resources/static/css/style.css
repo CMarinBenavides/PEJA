@@ -13,12 +13,11 @@ body {
   align-items: center;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
-  height: 102vh;
-  margin: -20px 0 0;
+  height: 100vh;
   background-image: url("../sources/images/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(1.2vh);
   color: #222;
   padding-bottom: 50px;
 }

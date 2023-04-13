@@ -2,6 +2,7 @@ package com.archerprop.peja.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.persistence.Query;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,12 +17,13 @@ import com.archerprop.peja.repository.RoleRepositorio;
 import com.archerprop.peja.repository.UsuarioRepositorio;
 import org.springframework.transaction.annotation.Transactional;
 import com.archerprop.peja.service.UsuarioService;
-
+import java.util.regex.Matcher;
 import jakarta.persistence.EntityManager;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,6 +45,27 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         Rol rol = RoleRepositorio.findByName(userRol);
         Collection<Rol> roles = Arrays.asList(rol);
+        String regex = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(registroDTO.getCorreo());
+        if (registroDTO.getCedula() == null
+                || registroDTO.getCedula().toString().length() <= 0
+                || registroDTO.getCedula().toString().length() > 12
+                || usuarioRepositorio.existsByCedula(registroDTO.getCedula())
+                || registroDTO.getNombre() == null
+                || registroDTO.getNombre().length() <= 0
+                || registroDTO.getNombre().length() > 30
+                || registroDTO.getNombre().matches(".*\\d.*")
+                || registroDTO.getApellido() == null
+                || registroDTO.getApellido().length() <= 0
+                || registroDTO.getApellido().length() > 30
+                || registroDTO.getApellido().matches(".*\\d.*")
+                || registroDTO.getCorreo() == null
+                || registroDTO.getCorreo().length() <= 0
+                || registroDTO.getCorreo().length() > 50
+                || !matcher.matches()) {
+            return null;
+        }
         Usuario usuario = new Usuario(
                 registroDTO.getCedula(),
                 registroDTO.getNombre(),

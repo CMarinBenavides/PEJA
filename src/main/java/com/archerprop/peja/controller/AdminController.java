@@ -99,7 +99,13 @@ public class AdminController {
         System.out.println("correo: " + correo);
         Usuario usuarioM = usuarioService.buscarUsuario(correo);
         String rol = usuarioM.getRoles().iterator().next().getName();
+        List<Usuario> usuariosA = usuarioService.listarUsuariosAdmin();
+        List<Usuario> usuariosD = usuarioService.listarUsuariosDocente();
+        List<Usuario> usuariosE = usuarioService.listarUsuariosEstudiante();
         model.addAttribute("usuarioMod", usuarioM);
+        model.addAttribute("usuariosAdmin", usuariosA);
+        model.addAttribute("usuariosDocente", usuariosD);
+        model.addAttribute("usuariosEstudiante", usuariosE);
         model.addAttribute("modificarA", false);
         model.addAttribute("modificarD", false);
         model.addAttribute("modificarE", false);
@@ -171,6 +177,6 @@ public class AdminController {
     public String cancelar(Model model) {
         Usuario usuario = null;
         model.addAttribute("usuarioregistro", usuario);
-        return "redirect:/admin";
+        return "redirect:/admin#tools";
     }
 }

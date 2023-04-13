@@ -55,30 +55,30 @@ public class RegistroUsuarioController {
         if (rol.equals("admin")) {
             try {
                 if (usuarioService.guardar(RegistroDTO, "ADMIN") != null) {
-                    return "redirect:/admin?successA";
+                    return "redirect:/admin?successA#tools";
                 }
             } catch (Exception e) {
-                return "redirect:/admin?failureA";
+                return "redirect:/admin?failureA#tools";
             }
-            return "redirect:/admin?failureA";
+            return "redirect:/admin?failureA#tools";
         } else if (rol.equals("docente")) {
             try {
                 if (usuarioService.guardar(RegistroDTO, "DOCENTE") != null) {
-                    return "redirect:/admin?successD";
+                    return "redirect:/admin?successD#tools";
                 }
             } catch (Exception e) {
-                return "redirect:/admin?failureD";
+                return "redirect:/admin?failureD#tools";
             }
-            return "redirect:/admin?failureD";
+            return "redirect:/admin?failureD#tools";
         } else if (rol.equals("estudiante")) {
             try {
                 if (usuarioService.guardar(RegistroDTO, "ESTUDIANTE") != null) {
-                    return "redirect:/admin?successE";
+                    return "redirect:/admin?successE#tools";
                 }
             } catch (Exception e) {
-                return "redirect:/admin?failureE";
+                return "redirect:/admin?failureE#tools";
             }
-            return "redirect:/admin?failureE";
+            return "redirect:/admin?failureE#tools";
         }
         return "redirect:/admin?failureE";
     }
@@ -94,7 +94,6 @@ public class RegistroUsuarioController {
      */
     @PostMapping("/admin/mod")
     public String modificarUsuario(@ModelAttribute("usuarioMod") UsuarioRegistroDTO RegistroDTO, Model model) {
-        System.out.println(RegistroDTO.getNombre());
         Usuario usuarioR = usuarioService.buscarUsuario(RegistroDTO.getCorreo());
         String rol = usuarioR.getRoles().iterator().next().getName();
 
@@ -105,12 +104,12 @@ public class RegistroUsuarioController {
                     model.addAttribute("usuarioMod", usuario);
                     model.addAttribute("modificarA", false);
                     model.addAttribute("rol", "SUPERADMIN");
-                    return "redirect:/admin?successChangeA";
+                    return "redirect:/admin?successChangeA#tools";
                 }
             } catch (Exception e) {
-                return "redirect:/admin?failureA";
+                return "redirect:/admin?failure#tools";
             }
-            return "redirect:/admin?failureA";
+            return "redirect:/admin?failureA#tools";
         }
         if (rol.equals("DOCENTE")) {
             try {
@@ -119,12 +118,12 @@ public class RegistroUsuarioController {
                     model.addAttribute("usuarioMod", usuario);
                     model.addAttribute("modificarD", false);
                     model.addAttribute("rol", "SUPERADMIN");
-                    return "redirect:/admin?successChangeD";
+                    return "redirect:/admin?successChangeD#tools";
                 }
             } catch (Exception e) {
-                return "redirect:/admin?failureD";
+                return "redirect:/admin?failureD#tools";
             }
-            return "redirect:/admin?failureD";
+            return "redirect:/admin?failureD#tools";
         }
         if (rol.equals("ESTUDIANTE")) {
             try {
@@ -133,14 +132,14 @@ public class RegistroUsuarioController {
                     model.addAttribute("usuarioMod", usuario);
                     model.addAttribute("modificarE", false);
                     model.addAttribute("rol", "SUPERADMIN");
-                    return "redirect:/admin?successChangeE";
+                    return "redirect:/admin?successChangeE#tools";
                 }
             } catch (Exception e) {
-                return "redirect:/admin?failureE";
+                return "redirect:/admin?failureE#tools";
             }
-            return "redirect:/admin?failureE";
+            return "redirect:/admin?failureE#tools";
         }
-        return "redirect:/admin?failureA";
+        return "redirect:/admin?failureA#tools";
     }
 
 }
