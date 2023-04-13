@@ -52,7 +52,9 @@ public class AdminController {
         model.addAttribute("usuariosAdmin", usuariosA);
         model.addAttribute("usuariosDocente", usuariosD);
         model.addAttribute("usuariosEstudiante", usuariosE);
-        model.addAttribute("modificar", false);
+        model.addAttribute("modificarA", false);
+        model.addAttribute("modificarD", false);
+        model.addAttribute("modificarE", false);
 
         return "admin";
     }
@@ -60,7 +62,7 @@ public class AdminController {
     /**
      * Método que devuelve un nuevo objeto UsuarioRegistroDTO para ser utilizado en
      * la vista
-     * 
+     *
      * @return nuevo objeto UsuarioRegistroDTO
      */
     @ModelAttribute("usuario")
@@ -79,6 +81,11 @@ public class AdminController {
         return new UsuarioRegistroDTO();
     }
 
+    @ModelAttribute("usuarioMod")
+    public UsuarioRegistroDTO retornarModificacionUsuarioRegistroDTO() {
+        return new UsuarioRegistroDTO();
+    }
+
     /**
      * Método que maneja la solicitud GET para modificar un usuario
      * 
@@ -89,15 +96,36 @@ public class AdminController {
      */
     @GetMapping("/{correo}")
     public String modificarUsuario(@PathVariable String correo, Model model) {
-        Usuario usuario = usuarioService.buscarUsuario(correo);
-        model.addAttribute("usuarioregistro", usuario);
-        model.addAttribute("modificar", true);
+        System.out.println("correo: " + correo);
+        Usuario usuarioM = usuarioService.buscarUsuario(correo);
+        String rol = usuarioM.getRoles().iterator().next().getName();
+        List<Usuario> usuariosA = usuarioService.listarUsuariosAdmin();
+        List<Usuario> usuariosD = usuarioService.listarUsuariosDocente();
+        List<Usuario> usuariosE = usuarioService.listarUsuariosEstudiante();
+        model.addAttribute("usuarioMod", usuarioM);
+        model.addAttribute("usuariosAdmin", usuariosA);
+        model.addAttribute("usuariosDocente", usuariosD);
+        model.addAttribute("usuariosEstudiante", usuariosE);
+        model.addAttribute("modificarA", false);
+        model.addAttribute("modificarD", false);
+        model.addAttribute("modificarE", false);
+        model.addAttribute("rol", "SUPERADMIN");
+        if (rol.equals("ADMIN")) {
+            model.addAttribute("modificarA", true);
+            return "admin";
+        } else if (rol.equals("DOCENTE")) {
+            model.addAttribute("modificarD", true);
+            return "admin";
+        } else if (rol.equals("ESTUDIANTE")) {
+            model.addAttribute("modificarE", true);
+            return "admin";
+        }
         return "admin";
     }
 
     /**
      * Método que maneja la solicitud GET para eliminar un usuario
-     * 
+     *
      * @param correo correo electrónico del usuario a eliminar
      * @param model  objeto Model que se utiliza para agregar atributos a la vista
      * @return redirige a la página admin con la bandera "successDelete" establecida
@@ -107,16 +135,48 @@ public class AdminController {
     @GetMapping("/{correo}/delete")
     public String eliminarUsuario(@PathVariable String correo, Model model) {
         Usuario usuarioR = usuarioService.buscarUsuario(correo);
-        try {
-            if (usuarioService.eliminar(usuarioR)) {
-                Usuario usuario = null;
-                model.addAttribute("usuarioregistro", usuario);
-                return "redirect:/admin?successDelete";
+        String rol = usuarioR.getRoles().iterator().next().getName();
+        if (rol.equals("ADMIN")) {
+            try {
+                if (usuarioService.eliminar(usuarioR)) {
+                    Usuario usuario = null;
+                    model.addAttribute("usuarioregistro", usuario);
+                    return "redirect:/admin?successDeleteA";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failureA";
             }
-        } catch (Exception e) {
-            return "redirect:/admin?failure";
+            return "redirect:/admin?failureA";
+        } else if (rol.equals("DOCENTE")) {
+            try {
+                if (usuarioService.eliminar(usuarioR)) {
+                    Usuario usuario = null;
+                    model.addAttribute("usuarioregistro", usuario);
+                    return "redirect:/admin?successDeleteD";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failureD";
+            }
+            return "redirect:/admin?failureD";
+        } else if (rol.equals("ESTUDIANTE")) {
+            try {
+                if (usuarioService.eliminar(usuarioR)) {
+                    Usuario usuario = null;
+                    model.addAttribute("usuarioregistro", usuario);
+                    return "redirect:/admin?successDeleteE";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failureE";
+            }
+            return "redirect:/admin?failureE";
         }
-        return "redirect:/admin?failure";
+        return "redirect:/admin?failureA";
     }
 
+    @GetMapping("/cancel")
+    public String cancelar(Model model) {
+        Usuario usuario = null;
+        model.addAttribute("usuarioregistro", usuario);
+        return "redirect:/admin#tools";
+    }
 }

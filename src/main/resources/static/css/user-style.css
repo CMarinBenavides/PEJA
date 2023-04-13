@@ -4,12 +4,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: "Open Sans", sans-serif;
-  color: #222;
-  padding-bottom: 50px;
+  color: #4b4b4b;
+  padding-bottom: 40px;
 }
 
 .container {
@@ -17,20 +18,20 @@ body {
   margin: 0 auto;
 }
 
-.navbar {
+.nav.navbar {
   position: fixed;
-  background-color: #222;
+  background-color: rgb(52, 73, 94, 0);
   top: 0;
   left: 0;
   right: 0;
   transition: all 0.3s ease-in-out;
 }
 
-.navbar .container {
+.nav.navbar .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  width: 90%;
   transition: all 0.3s ease-in-out;
 }
 
@@ -47,24 +48,22 @@ body {
   padding: 7px 15px;
   transition: all 0.3s ease-in-out;
 }
+.nav.nav.navbar a.btn:hover {
+  color: #34495e;
+}
 
 .navbar.active {
-  background-color: #fff;
+  background-color: #2c3e50;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .navbar.active a {
-  color: #000;
-}
-
-.navbar.active .container {
-  padding: 10px 0;
+  color: #ffffff;
 }
 
 .navbar a.current,
 .navbar a:hover {
-  color: #282acf;
-  font-weight: bold;
+  color: #ffffff;
 }
 
 .hero {
@@ -118,4 +117,41 @@ body {
 
 .col-md-10 {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+/*------------Estilos del menu de paginas------------*/
+
+section.content {
+  max-width: 100vw;
+  height: 87vh;
+}
+
+/*------------Estilos botones------------*/
+
+.nav-pills button.nav-link.active {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+.nav-pills button.nav-link {
+  color: #2c3e50;
+}
+
+.nav-item .nav-link {
+  color: #34495e;
+}
+
+.nav-item .nav-link:hover {
+  color: #2c3e50;
+}
+
+/*------------estilos formularios registro------------*/
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }

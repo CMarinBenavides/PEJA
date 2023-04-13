@@ -4,10 +4,9 @@
     <meta charset="UTF-8" /> <!--Esto especifica la codificación de caracteres utilizada en el documento, que es UTF-8 en este caso.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!--Esta metaetiqueta se usa para especificar cómo se debe representar el contenido en diferentes dispositivos.-->
     <link rel="stylesheet" href="css/user-style.css" th:href="@{/css/user-style.css}"/> <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo llamado "user-style.css".-->
-    <link href="css/bootstrap.min.css" rel="stylesheet"/> <!--Esta es otra etiqueta de enlace que enlaza con un archivo CSS externo llamado "bootstrap.min.css" que se usa para diseñar la página web.-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> <!--Esta es otra etiqueta de enlace que enlaza con una versión diferente del archivo CSS de Bootstrap que se carga desde una CDN (red de entrega de contenido).-->
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> <!--Esta es otra etiqueta de enlace que enlaza con una versión diferente del archivo CSS de Bootstrap que se carga desde una CDN (red de entrega de contenido). -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'> <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo para un conjunto de iconos.-->
-    <script src="javascript/smooth-scroll.polyfills.min.js"></script> <!--Esta es una etiqueta de secuencia de comandos que se vincula a un archivo JavaScript externo que se utiliza para desplazarse sin problemas por la página web.-->
     <title>Portal de Estudio José de Alejandría</title> <!--Este es el título de la página web que se muestra en la barra de título del navegador.-->
   </head>
   <body>
@@ -23,13 +22,13 @@
       </symbol>
     </svg>
     <!--La etiqueta <svg> contiene varios símbolos definidos en formato SVG que se utilizan dentro del visual de la pagina-->
-    <nav class=" nav navbar">
+    <nav class="nav navbar">
       <div class="container">
         <h1 class="logo"><a th:href="@{/admin}">PEJA</a></h1>
         <ul>
           <li><a href="#" class="current">Inicio</a></li>
           <li><a href="#tools">Herramientas</a></li>
-          <li><button type="button" class="btn-close btn-close-white" aria-label="Close"><a th:href="@{/logout}"></a></button></li>
+          <li><a class="btn btn-outline-light" th:href="@{/logout}">Salir</a></li>
         </ul>
       </div>
     </nav>
@@ -43,7 +42,7 @@
     </div>
     <!--Es un contenedor de la sección principal de la página que contiene un mensaje de bienvenida-->
 
-    <section id="tools" class="container content">
+    <section id="tools" class="content">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
 
 	<!--A continuacion se realizan botones-->
@@ -70,94 +69,96 @@
               <button class="nav-link" id="v-pills-listAdmin-tab" data-bs-toggle="pill" data-bs-target="#v-pills-listAdmin" type="button" role="tab" aria-controls="v-pills-listAdmin" aria-selected="false">Lista</button>
             </div>
             <div class="tab-content w-100" id="v-pills-tabContent">
-		      <!--Las siguientes lines representan dentro del div del panel activo, hay cuatro elementos div que solo se mostrarán si se cumplen ciertas condiciones, según lo determinado por el atributo Thymeleaf. Si el parámetro "successChange" es verdadero, se mostrará un div de alerta con la clase "alert-info" con un mensaje de éxito que indica que se ha realizado un cambio. Lo mismo ocurre con los parámetros "successDelete" y "success", con diferentes mensajes mostrados en cada caso. Si el parámetro "fallo" es verdadero, se mostrará un div de alerta con la clase "alerta-peligro" con un mensaje que indica que se ha producido un error. -->
+		      <!--Las siguientes lineas representan dentro del div del panel activo, hay cuatro elementos div que solo se mostrarán si se cumplen ciertas condiciones, según lo determinado por el atributo Thymeleaf. Si el parámetro "successChange" es verdadero, se mostrará un div de alerta con la clase "alert-info" con un mensaje de éxito que indica que se ha realizado un cambio. Lo mismo ocurre con los parámetros "successDelete" y "success", con diferentes mensajes mostrados en cada caso. Si el parámetro "fallo" es verdadero, se mostrará un div de alerta con la clase "alerta-peligro" con un mensaje que indica que se ha producido un error. -->
               <div class="tab-pane fade show active p-3" id="v-pills-addAdmin" role="tabpanel" aria-labelledby="v-pills-addAdmin-tab">
                       <div class="col-md-offset-3">
-                          <div th:if="${param.successChange}">
+                          <div th:if="${param.successChangeA}">
                             <div class="alert alert-info">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                 Se ha modificado con exito.
                             </div>
                           </div>
-                          <div th:if="${param.successDelete}">
+                          <div th:if="${param.successDeleteA}">
                             <div class="alert alert-info">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                 Se ha eliminado con exito.
                             </div>
                           </div>
-                          <div th:if="${param.success}">
+                          <div th:if="${param.successA}">
                               <div class="alert alert-info">
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                   Se ha registrado correctamente.
                               </div>
                           </div>
-                          <div th:if="${param.failure}">
+                          <div th:if="${param.failureA}">
                             <div class="alert alert-danger">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                 Ha ocurrido un error.
                             </div>
                         </div>
                           <p class="text-center fs-2">Formulario de registro</p>
-                            <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de JavaScript al enviar el formulario.-->
+                            <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}" th:if="${modificarA} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
                               <div class="form-floating mb-3"> <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" > <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"> <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
                                 <label for="cedula">Cedula</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required autofocus="autofocus">
+                                  <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required >
                                   <label for="nombre">Nombre</label>
                               </div>
 				                <!-- Despues de la cedula repite para cada uno de los campos de entrada restantes, con diferentes atributos de "type", "id", "placeholder", "th:field", "label for", etc-->
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required autofocus="autofocus">
+                                  <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required>
                                   <label for="apellido">Apellido</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required autofocus="autofocus">
+                                  <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required>
                                   <label for="correo">Correo</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12">
+                                  <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required  minlength="8" maxlength="12">
                                   <label for="clave">Clave</label>
                               </div>
                               <br>
                               <div class="form-group">
-                                  <button type="submit" class="btn btn-primary">Registrar</button> <!-- Se genera el apartado registrar usuario-->
+                                  <button type="submit" class="btn btn-success">Registrar</button> <!-- Se genera el apartado registrar usuario-->
+                                  <button type="reset" class="btn btn-danger">Borrar</button> <!-- Se genera el apartado borrar usuario-->
                               </div>
                             </form>
 
-                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == true" onsubmit="validate(event)">
+                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioMod}" th:if="${modificarA} == true" onsubmit="validate(event)">
                             <div class="form-floating mb-3">
-                              <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" >
+                              <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
                               <label for="cedula">Cedula</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required autofocus="autofocus">
+                                <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required >
                                 <label for="nombre">Nombre</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required autofocus="autofocus">
+                                <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required >
                                 <label for="apellido">Apellido</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required autofocus="autofocus" disabled>
+                                <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required  readonly onmousedown="return false;">
 				                <!--Elemento con clase form-floating mb-3que contiene un input elemento de tipo email con id correo, texto de marcador de posición " nombre@ejemplo.com " y atributo obligatorio. También tiene un th:fieldatributo con la expresión *{correo}que vincula el valor de entrada a la correopropiedad del usuarioregistroobjeto. El autofocusatributo establece el foco en esta entrada cuando se carga la página, y el disabledatributo deshabilita el campo de entrada para que no se pueda editar. También tiene un labelelemento que muestra la etiqueta "Correo" para esta entrada.-->
                                 <label for="correo">Correo</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12"> <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
+                                <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required  minlength="8" maxlength="12"> <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
                                 <label for="clave">Clave</label>
                             </div>
                             <br>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Modificar</button>
+                                <button type="submit" class="btn btn-success">Modificar</button>
+                                <a class="btn btn-danger" th:href="@{/admin/cancel}">Cancelar</a>
                             </div>
                           </form>
                       </div>
               </div>
               <div class="tab-pane fade" id="v-pills-listAdmin" role="tabpanel" aria-labelledby="v-pills-listAdmin-tab"> <!--la etiqueta final de un elemento de formulario que se utiliza para modificar la información del usuario.-->
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="tablaA">
                   <thead>
                     <tr>
 			         <!--Elemento div con clase "contenido de pestaña" que contiene dos paneles de pestañas, uno con id "v-pills-addAdmin" y otro con id "v-pills-listAdmin".-->
@@ -169,27 +170,26 @@
                     </tr>
                   </thead>
                   <tbody> <!--Elemento tbody que contiene un bucle que usa el atributo Thymeleaf th:each para mostrar la información del usuario en las filas de la tabla-->
-                    <tr th:each="user : ${usuariosAdmin}">
+                    <tr th:each="user : ${usuariosAdmin}" th:if="${usuariosAdmin != null and !usuariosAdmin.isEmpty()}">
                       <td th:text="${user.apellido}">ND</td>
                       <td th:text="${user.nombre}">ND</td>
                       <td th:text="${user.cedula}">ND</td>
                       <td th:text="${user.correo}">ND</td>
                       <td>
 			            <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
-                        <a th:href="@{/admin/}+${user.correo}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
-                        <a th:href="@{/admin/}+${user.correo}+@{/delete}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+                        <a th:href="@{/admin/}+${user.correo}+@{#tools}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                        <a th:href="@{/admin/}+${user.correo}+@{/delete#tools}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
                       </td>
                     </tr>
-                    
-                    <tr  th:if="${usuariosAdmin} == null">
-                      <td >ND</td>
-                      <td >ND</td>
-                      <td >ND</td>
-                      <td  >ND</td>
+                    <tr  th:if="${usuariosAdmin == null or usuariosAdmin.isEmpty()}">
+                      <td>ND</td>
+                      <td>ND</td>
+                      <td>ND</td>
+                      <td>ND</td>
                       <td>
 			            <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
-                        <a th:href="#" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
-                        <a th:href="#" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+                        <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                        <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
                       </td>
                   </tbody>
                 </table>
@@ -207,91 +207,93 @@
 		      <!--Las siguientes lines representan dentro del div del panel activo, hay cuatro elementos div que solo se mostrarán si se cumplen ciertas condiciones, según lo determinado por el atributo Thymeleaf. Si el parámetro "successChange" es verdadero, se mostrará un div de alerta con la clase "alert-info" con un mensaje de éxito que indica que se ha realizado un cambio. Lo mismo ocurre con los parámetros "successDelete" y "success", con diferentes mensajes mostrados en cada caso. Si el parámetro "fallo" es verdadero, se mostrará un div de alerta con la clase "alerta-peligro" con un mensaje que indica que se ha producido un error. -->
               <div class="tab-pane fade show active p-3" id="v-pills-addDocente" role="tabpanel" aria-labelledby="v-pills-addDocente-tab">
                       <div class="col-md-offset-3">
-                          <div th:if="${param.successChange}">
+                          <div th:if="${param.successChangeD}">
                             <div class="alert alert-info">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                 Se ha modificado con exito.
                             </div>
                           </div>
-                          <div th:if="${param.successDelete}">
+                          <div th:if="${param.successDeleteD}">
                             <div class="alert alert-info">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                 Se ha eliminado con exito.
                             </div>
                           </div>
-                          <div th:if="${param.success}">
+                          <div th:if="${param.successD}">
                               <div class="alert alert-info">
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                   Se ha registrado correctamente.
                               </div>
                           </div>
-                          <div th:if="${param.failure}">
+                          <div th:if="${param.failureD}">
                             <div class="alert alert-danger">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                 Ha ocurrido un error.
                             </div>
                         </div>
                           <p class="text-center fs-2">Formulario de registro</p>
-                            <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de JavaScript al enviar el formulario.-->
+                            <form th:action="@{/registro/docente}" method="post" th:object="${usuarioregistro}" th:if="${modificarD} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
                               <div class="form-floating mb-3"> <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" > <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"> <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
                                 <label for="cedula">Cedula</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required autofocus="autofocus">
+                                  <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required >
                                   <label for="nombre">Nombre</label>
                               </div>
 				                <!-- Despues de la cedula repite para cada uno de los campos de entrada restantes, con diferentes atributos de "type", "id", "placeholder", "th:field", "label for", etc-->
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required autofocus="autofocus">
+                                  <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required >
                                   <label for="apellido">Apellido</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required autofocus="autofocus">
+                                  <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required>
                                   <label for="correo">Correo</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12">
+                                  <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required minlength="8" maxlength="12">
                                   <label for="clave">Clave</label>
                               </div>
                               <br>
                               <div class="form-group">
-                                  <button type="submit" class="btn btn-primary">Registrar</button> <!-- Se genera el apartado registrar usuario-->
+                                  <button type="submit" class="btn btn-success">Registrar</button> <!-- Se genera el apartado registrar usuario-->
+                                  <button type="reset" class="btn btn-danger">Borrar</button> <!-- Se genera el apartado borrar usuario-->
                               </div>
                             </form>
-
-                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == true" onsubmit="validate(event)">
+                            <!--El código muestra un formulario HTML que tiene tres campos: "cedula", "nombre" y "apellido". El formulario utiliza el método "POST" para enviar los datos al servidor, y la acción del formulario se establece en "/registro/admin/mod".-->
+                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioMod}" th:if="${modificarD} == true" onsubmit="validate(event)">
                             <div class="form-floating mb-3">
-                              <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" >
+                              <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" >
                               <label for="cedula">Cedula</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required autofocus="autofocus">
+                                <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required>
                                 <label for="nombre">Nombre</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required autofocus="autofocus">
+                                <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required>
                                 <label for="apellido">Apellido</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required autofocus="autofocus" disabled>
+                                <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required readonly onmousedown="return false;">
 				                <!--Elemento con clase form-floating mb-3que contiene un input elemento de tipo email con id correo, texto de marcador de posición " nombre@ejemplo.com " y atributo obligatorio. También tiene un th:fieldatributo con la expresión *{correo}que vincula el valor de entrada a la correopropiedad del usuarioregistroobjeto. El autofocusatributo establece el foco en esta entrada cuando se carga la página, y el disabledatributo deshabilita el campo de entrada para que no se pueda editar. También tiene un labelelemento que muestra la etiqueta "Correo" para esta entrada.-->
                                 <label for="correo">Correo</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12"> <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
+                                <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required  minlength="8" maxlength="12"> <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
                                 <label for="clave">Clave</label>
                             </div>
                             <br>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Modificar</button>
+                                <button type="submit" class="btn btn-success">Modificar</button>
+                                <a class="btn btn-danger" th:href="@{/admin/cancel}">Cancelar</a>
                             </div>
                           </form>
                       </div>
               </div>
               <div class="tab-pane fade" id="v-pills-listDocente" role="tabpanel" aria-labelledby="v-pills-listDocente-tab"> <!--la etiqueta final de un elemento de formulario que se utiliza para modificar la información del usuario.-->
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="tablaD">
                   <thead>
                     <tr>
 			         <!--Elemento div con clase "contenido de pestaña" que contiene dos paneles de pestañas, uno con id "v-pills-addDocente" y otro con id "v-pills-listDocente".-->
@@ -303,26 +305,26 @@
                     </tr>
                   </thead>
                   <tbody> <!--Elemento tbody que contiene un bucle que usa el atributo Thymeleaf th:each para mostrar la información del usuario en las filas de la tabla-->
-                    <tr th:each="user : ${usuariosDocente}" th:if="${usuariosDocente}">
+                    <tr th:each="user : ${usuariosDocente}" th:if="${usuariosDocente != null and !usuariosDocente.isEmpty()}">
                       <td th:text="${user.apellido}">ND</td>
                       <td th:text="${user.nombre}">ND</td>
                       <td th:text="${user.cedula}">ND</td>
                       <td th:text="${user.correo}">ND</td>
                       <td>
 			            <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
-                        <a th:href="@{/admin/}+${user.correo}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
-                        <a th:href="@{/admin/}+${user.correo}+@{/delete}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+                        <a th:href="@{/admin/}+${user.correo}+@{#tools}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                        <a th:href="@{/admin/}+${user.correo}+@{/delete#tools}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
                       </td>
                     </tr>
-                    <tr  th:if="${usuariosDocente  == null}">
-                      <td>hola</td>
+                    <tr  th:if="${usuariosDocente == null or usuariosDocente.isEmpty()}">
+                      <td>ND</td>
                       <td>ND</td>
                       <td>ND</td>
                       <td>ND</td>
                       <td>
 			            <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
-                        <a th:href="#" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
-                        <a th:href="#" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+                        <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                        <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
                       </td>
                     </tr>
                   </tbody>
@@ -340,92 +342,98 @@
             <div class="tab-content w-100" id="v-pills-tabContent">
 		      <!--Las siguientes lines representan dentro del div del panel activo, hay cuatro elementos div que solo se mostrarán si se cumplen ciertas condiciones, según lo determinado por el atributo Thymeleaf. Si el parámetro "successChange" es verdadero, se mostrará un div de alerta con la clase "alert-info" con un mensaje de éxito que indica que se ha realizado un cambio. Lo mismo ocurre con los parámetros "successDelete" y "success", con diferentes mensajes mostrados en cada caso. Si el parámetro "fallo" es verdadero, se mostrará un div de alerta con la clase "alerta-peligro" con un mensaje que indica que se ha producido un error. -->
               <div class="tab-pane fade show active p-3" id="v-pills-addDocente" role="tabpanel" aria-labelledby="v-pills-addDocente-tab">
-                      <div class="col-md-offset-3">
-                          <div th:if="${param.successChange}">
+                      <div class="col-md-offset-3"><!--Lineas de comprobacion cuando se modifica un objeto o dato en la página, se muestra un mensaje de éxito para notificar al usuario.-->
+                          <div th:if="${param.successChangeD}">
                             <div class="alert alert-info">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                 Se ha modificado con exito.
                             </div>
                           </div>
-                          <div th:if="${param.successDelete}">
+                          <!--Lineas de comprobacion (Alerta) cuando se elimina un objeto o dato en la página, se muestra un mensaje de éxito para notificar al usuario.-->
+                          <div th:if="${param.successDeleteD}">
                             <div class="alert alert-info">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                 Se ha eliminado con exito.
                             </div>
                           </div>
-                          <div th:if="${param.success}">
+                          <!--Lineas de comprobacion (Alerta) cuando se realiza el registro correctamente, se muestra un mensaje de éxito para notificar al usuario.-->
+                          <div th:if="${param.successD}">
                               <div class="alert alert-info">
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                   Se ha registrado correctamente.
                               </div>
                           </div>
-                          <div th:if="${param.failure}">
+                          <!--Lineas de comprobacion (Alerta) cuando ha ocurrido un error dentro de la página, ya sea en cualquiera de los formularios, se muestra un mensaje de éxito para notificar al usuario.-->
+                          <div th:if="${param.failureD}">
                             <div class="alert alert-danger">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                 Ha ocurrido un error.
                             </div>
                         </div>
                           <p class="text-center fs-2">Formulario de registro</p>
-                            <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de JavaScript al enviar el formulario.-->
+                            <form th:action="@{/registro/docente}" method="post" th:object="${usuarioregistro}" th:if="${modificarD} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
                               <div class="form-floating mb-3"> <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" > <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" > <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
                                 <label for="cedula">Cedula</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required autofocus="autofocus">
+                                  <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required >
                                   <label for="nombre">Nombre</label>
                               </div>
 				                <!-- Despues de la cedula repite para cada uno de los campos de entrada restantes, con diferentes atributos de "type", "id", "placeholder", "th:field", "label for", etc-->
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required autofocus="autofocus">
+                                  <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required >
                                   <label for="apellido">Apellido</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required autofocus="autofocus">
+                                  <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required >
                                   <label for="correo">Correo</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12">
+                                  <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required minlength="8" maxlength="12">
                                   <label for="clave">Clave</label>
                               </div>
                               <br>
                               <div class="form-group">
-                                  <button type="submit" class="btn btn-primary">Registrar</button> <!-- Se genera el apartado registrar usuario-->
+                                  <button type="submit" class="btn btn-success">Registrar</button> <!-- Se genera el apartado registrar usuario-->
+                                  <button type="reset" class="btn btn-danger">Borrar</button> <!-- Se genera el apartado borrar usuario-->
                               </div>
                             </form>
 
-                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == true" onsubmit="validate(event)">
+                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioMod}" th:if="${modificarD} == true" onsubmit="validate(event)">
                             <div class="form-floating mb-3">
-                              <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" >
+                              <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" >
                               <label for="cedula">Cedula</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required autofocus="autofocus">
+                                <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required >
                                 <label for="nombre">Nombre</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required autofocus="autofocus">
+                                <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required >
                                 <label for="apellido">Apellido</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required autofocus="autofocus" disabled>
+                                <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required  readonly onmousedown="return false;">
 				                <!--Elemento con clase form-floating mb-3que contiene un input elemento de tipo email con id correo, texto de marcador de posición " nombre@ejemplo.com " y atributo obligatorio. También tiene un th:fieldatributo con la expresión *{correo}que vincula el valor de entrada a la correopropiedad del usuarioregistroobjeto. El autofocusatributo establece el foco en esta entrada cuando se carga la página, y el disabledatributo deshabilita el campo de entrada para que no se pueda editar. También tiene un labelelemento que muestra la etiqueta "Correo" para esta entrada.-->
                                 <label for="correo">Correo</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12"> <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
+                                <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required  minlength="8" maxlength="12"> <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
                                 <label for="clave">Clave</label>
                             </div>
                             <br>
+                            <!--Aqui se encuentran dos botones de "modificar" y "Cancelar" donde el usuario puede modificar ciertos datos y tiene la opción de cancelar la operación.-->
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Modificar</button>
+                                <button type="submit" class="btn btn-success">Modificar</button>
+                                <a class="btn btn-danger" th:href="@{/admin/cancel}">Cancelar</a>
                             </div>
                           </form>
                       </div>
               </div>
               <div class="tab-pane fade" id="v-pills-listDocente" role="tabpanel" aria-labelledby="v-pills-listDocente-tab"> <!--la etiqueta final de un elemento de formulario que se utiliza para modificar la información del usuario.-->
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="tablaD">
                   <thead>
                     <tr>
 			         <!--Elemento div con clase "contenido de pestaña" que contiene dos paneles de pestañas, uno con id "v-pills-addDocente" y otro con id "v-pills-listDocente".-->
@@ -437,18 +445,28 @@
                     </tr>
                   </thead>
                   <tbody> <!--Elemento tbody que contiene un bucle que usa el atributo Thymeleaf th:each para mostrar la información del usuario en las filas de la tabla-->
-                    <tr th:each="user : ${usuariosDocente}">
+                    <tr th:each="user : ${usuariosDocente}" th:if="${usuariosDocente != null or !usuariosDocente.isEmpty()}">
                       <td th:text="${user.apellido}">ND</td>
                       <td th:text="${user.nombre}">ND</td>
                       <td th:text="${user.cedula}">ND</td>
                       <td th:text="${user.correo}">ND</td>
                       <td>
 			            <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
-                        <a th:href="@{/admin/}+${user.correo}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
-                        <a th:href="@{/admin/}+${user.correo}+@{/delete}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+                        <a th:href="@{/admin/}+${user.correo}+@{#tools}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                        <a th:href="@{/admin/}+${user.correo}+@{/delete#tools}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
                       </td>
                     </tr>
-
+                    <tr  th:if="${usuariosDocente == null or usuariosDocente.isEmpty()}"> <!-- Verificar si la variable "usuariosDocente" es nula o está vacía. Si la variable está vacía o nula, se muestra una fila de una tabla HTML con la cadena "ND" (no disponible) en cada celda de la fila. -->
+                      <td>ND</td>
+                      <td>ND</td>
+                      <td>ND</td>
+                      <td>ND</td>
+                      <td>
+			            <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
+                        <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                        <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -459,81 +477,82 @@
           <div class="d-flex align-items-start">
             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
               <button class="nav-link active" id="v-pills-addEstudiante-tab" data-bs-toggle="pill" data-bs-target="#v-pills-addEstudiante" type="button" role="tab" aria-controls="v-pills-addEstudiante" aria-selected="true">Adicionar</button>
-              <button class="nav-link" id="v-pills-listDocente-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Lista</button>
+              <button class="nav-link" id="v-pills-listEstudiante-tab" data-bs-toggle="pill" data-bs-target="#v-pills-listEstudiante" type="button" role="tab" aria-controls="v-pills-listEstudiante" aria-selected="false">Lista</button>
             </div>
             <div class="tab-content w-100" id="v-pills-tabContent">
 		      <!--Las siguientes lines representan dentro del div del panel activo, hay cuatro elementos div que solo se mostrarán si se cumplen ciertas condiciones, según lo determinado por el atributo Thymeleaf. Si el parámetro "successChange" es verdadero, se mostrará un div de alerta con la clase "alert-info" con un mensaje de éxito que indica que se ha realizado un cambio. Lo mismo ocurre con los parámetros "successDelete" y "success", con diferentes mensajes mostrados en cada caso. Si el parámetro "fallo" es verdadero, se mostrará un div de alerta con la clase "alerta-peligro" con un mensaje que indica que se ha producido un error. -->
               <div class="tab-pane fade show active p-3" id="v-pills-addEstudiante" role="tabpanel" aria-labelledby="v-pills-addEstudiante-tab">
                       <div class="col-md-offset-3">
-                          <div th:if="${param.successChange}">
+                          <div th:if="${param.successChangeE}">
                             <div class="alert alert-info">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                 Se ha modificado con exito.
                             </div>
                           </div>
-                          <div th:if="${param.successDelete}">
+                          <div th:if="${param.successDeleteE}">
                             <div class="alert alert-info">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                 Se ha eliminado con exito.
                             </div>
                           </div>
-                          <div th:if="${param.success}">
+                          <div th:if="${param.successE}">
                               <div class="alert alert-info">
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
                                   Se ha registrado correctamente.
                               </div>
                           </div>
-                          <div th:if="${param.failure}">
+                          <div th:if="${param.failureE}">
                             <div class="alert alert-danger">
                               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                 Ha ocurrido un error.
                             </div>
                         </div>
                           <p class="text-center fs-2">Formulario de registro</p>
-                            <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de JavaScript al enviar el formulario.-->
+                            <form th:action="@{/registro/estudiante}" method="post" th:object="${usuarioregistro}" th:if="${modificarE} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
                               <div class="form-floating mb-3"> <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" > <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" > <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
                                 <label for="cedula">Cedula</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required autofocus="autofocus">
+                                  <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required >
                                   <label for="nombre">Nombre</label>
                               </div>
 				                <!-- Despues de la cedula repite para cada uno de los campos de entrada restantes, con diferentes atributos de "type", "id", "placeholder", "th:field", "label for", etc-->
                               <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required autofocus="autofocus">
+                                  <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required >
                                   <label for="apellido">Apellido</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required autofocus="autofocus">
+                                  <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required >
                                   <label for="correo">Correo</label>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12">
+                                  <input type="password" class="form-control" id="clave" placeholder="12345678" th:field="*{clave}" required minlength="8" maxlength="12">
                                   <label for="clave">Clave</label>
                               </div>
                               <br>
                               <div class="form-group">
-                                  <button type="submit" class="btn btn-primary">Registrar</button> <!-- Se genera el apartado registrar usuario-->
+                                  <button type="submit" class="btn btn-success">Registrar</button> <!-- Se genera el apartado registrar usuario-->
+                                  <button type="reset" class="btn btn-danger">Borrar</button> <!-- Se genera el apartado borrar usuario-->
                               </div>
                             </form>
 
-                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioregistro}" th:if="${modificar} == true" onsubmit="validate(event)">
+                          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioMod}" th:if="${modificarE} == true" onsubmit="validate(event)">
                             <div class="form-floating mb-3">
-                              <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" autofocus="autofocus" >
+                              <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" >
                               <label for="cedula">Cedula</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required autofocus="autofocus">
+                                <input type="text" class="form-control" id="nombre" placeholder="Pepito" th:field="*{nombre}" required >
                                 <label for="nombre">Nombre</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required autofocus="autofocus">
+                                <input type="text" class="form-control" id="apellido" placeholder="Pepo" th:field="*{apellido}" required >
                                 <label for="apellido">Apellido</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required autofocus="autofocus" disabled>
+                                <input type="email" class="form-control" id="correo"  placeholder="name@example.com" th:field="*{correo}" required readonly onmousedown="return false;" >
 				                <!--Elemento con clase form-floating mb-3que contiene un input elemento de tipo email con id correo, texto de marcador de posición " nombre@ejemplo.com " y atributo obligatorio. También tiene un th:fieldatributo con la expresión *{correo}que vincula el valor de entrada a la correopropiedad del usuarioregistroobjeto. El autofocusatributo establece el foco en esta entrada cuando se carga la página, y el disabledatributo deshabilita el campo de entrada para que no se pueda editar. También tiene un labelelemento que muestra la etiqueta "Correo" para esta entrada.-->
                                 <label for="correo">Correo</label>
                             </div>
@@ -543,13 +562,14 @@
                             </div>
                             <br>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Modificar</button>
+                                <button type="submit" class="btn btn-success">Modificar</button>
+                                <a class="btn btn-danger" th:href="@{/admin/cancel}">Cancelar</a>
                             </div>
                           </form>
                       </div>
               </div>
-              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-listDocente-tab"> <!--la etiqueta final de un elemento de formulario que se utiliza para modificar la información del usuario.-->
-                <table class="table table-bordered">
+              <div class="tab-pane fade" id="v-pills-listEstudiante" role="tabpanel" aria-labelledby="v-pills-listEstudiante-tab"> <!--la etiqueta final de un elemento de formulario que se utiliza para modificar la información del usuario.-->
+                <table class="table table-bordered" id="tablaE">
                   <thead>
                     <tr>
 			         <!--Elemento div con clase "contenido de pestaña" que contiene dos paneles de pestañas, uno con id "v-pills-addEstudiante" y otro con id "v-pills-profile".-->
@@ -561,18 +581,29 @@
                     </tr>
                   </thead>
                   <tbody> <!--Elemento tbody que contiene un bucle que usa el atributo Thymeleaf th:each para mostrar la información del usuario en las filas de la tabla-->
-                    <tr th:each="user : ${usuariosEstudiante}">
+                    <tr th:each="user : ${usuariosEstudiante}" th:if="${usuariosEstudiante != null or !usuariosEstudiante.isEmpty()}">
                       <td th:text="${user.apellido}">ND</td>
                       <td th:text="${user.nombre}">ND</td>
                       <td th:text="${user.cedula}">ND</td>
                       <td th:text="${user.correo}">ND</td>
                       <td>
 			            <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
-                        <a th:href="@{/admin/}+${user.correo}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
-                        <a th:href="@{/admin/}+${user.correo}+@{/delete}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+                        <a th:href="@{/admin/}+${user.correo}+@{#tools}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                        <a th:href="@{/admin/}+${user.correo}+@{/delete#tools}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
                       </td>
                     </tr>
 
+                    <tr  th:if="${usuariosEstudiante == null or usuariosEstudiante.isEmpty()}">
+                      <td>ND</td>
+                      <td>ND</td>
+                      <td>ND</td>
+                      <td>ND</td>
+                      <td>
+			            <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
+                        <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                        <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -581,28 +612,45 @@
         </div>
       </div>
     </section>
-    <script src="javascript/jquery-3.6.0.min.js" th:src="@{/javascript/jquery-3.6.0.min.js}"></script>
+    <script src="js/jquery-3.6.4.min.js" th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script
-    src="/javascript/bootstrap.bundle.min.js"
-    th:src="@{/javascript/bootstrap.bundle.min.js}"
-  ></script>
-    <script src="javascript/navbar.js" th:src="@{/javascript/navbar.js}"></script>
-    <script src="javascript/main.js" th:src="@{/javascript/main.js}"></script>
-    <!-- <script th:if="${rol != 'SUPERADMIN'}">
-      var admin = document.getElementById("admin");
-      admin.classList.remove("show");
-      admin.classList.remove("active");
-      var docente = document.getElementById("docente");
-      docente.classList.add("show");
-      docente.classList.add("active");
-      docente.ariaSelected = true;
-      //cambiar el area-selected a true
-
-      var btn_admin = document.getElementById("admin-tab");
-      btn_admin.classList.remove("active");
-      var btn_docente = document.getElementById("docente-tab");
-      btn_docente.classList.add("active");
-    </script> -->
+    <script src="js/navbar.js" th:src="@{/js/navbar.js}"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#tablaA").DataTable({
+          language: {
+            url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json",
+          },
+          lengthMenu: [
+            [5, 10, 15, 100],
+            [5, 10, 15, 100],
+          ],
+        });
+      });
+      $(document).ready(function () {
+        $("#tablaD").DataTable({
+          language: {
+            url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json",
+          },
+          lengthMenu: [
+            [5, 10, 15, 100],
+            [5, 10, 15, 100],
+          ],
+        });
+      });
+      $(document).ready(function () {
+        $("#tablaE").DataTable({
+          language: {
+            url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json",
+          },
+          lengthMenu: [
+            [5, 10, 15, 100],
+            [5, 10, 15, 100],
+          ],
+        });
+      });
+    </script>
   </body>
 </html>

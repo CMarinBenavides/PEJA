@@ -3,6 +3,7 @@ package com.archerprop.peja.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -48,16 +49,38 @@ public class RegistroUsuarioController {
      *                    del usuario a registrar.
      * @return Redirige a la página "admin" con un mensaje de éxito o fracaso.
      */
-    @PostMapping("/admin")
-    public String registrarUsuarioA(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO) {
-        try {
-            if (usuarioService.guardar(RegistroDTO, "ADMIN") != null) {
-                return "redirect:/admin?success";
+    @PostMapping("/{rol}")
+    public String registrarUsuario(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO,
+            @PathVariable("rol") String rol) {
+        if (rol.equals("admin")) {
+            try {
+                if (usuarioService.guardar(RegistroDTO, "ADMIN") != null) {
+                    return "redirect:/admin?successA#tools";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failureA#tools";
             }
-        } catch (Exception e) {
-            return "redirect:/admin?failure";
+            return "redirect:/admin?failureA#tools";
+        } else if (rol.equals("docente")) {
+            try {
+                if (usuarioService.guardar(RegistroDTO, "DOCENTE") != null) {
+                    return "redirect:/admin?successD#tools";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failureD#tools";
+            }
+            return "redirect:/admin?failureD#tools";
+        } else if (rol.equals("estudiante")) {
+            try {
+                if (usuarioService.guardar(RegistroDTO, "ESTUDIANTE") != null) {
+                    return "redirect:/admin?successE#tools";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failureE#tools";
+            }
+            return "redirect:/admin?failureE#tools";
         }
-        return "redirect:/admin?failure";
+        return "redirect:/admin?failureE";
     }
 
     /**
@@ -70,56 +93,53 @@ public class RegistroUsuarioController {
      * @return Redirige a la página "admin" con un mensaje de éxito o fracaso.
      */
     @PostMapping("/admin/mod")
-    public String modificarUsuarioA(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO, Model model) {
-        try {
-            if (usuarioService.modificar(RegistroDTO, "ADMIN")) {
-                Usuario usuario = null;
-                model.addAttribute("usuarioregistro", usuario);
-                model.addAttribute("modificar", false);
-                return "redirect:/admin?successChange";
-            }
-        } catch (Exception e) {
-            return "redirect:/admin?failure";
-        }
-        return "redirect:/admin?failure";
-    }
+    public String modificarUsuario(@ModelAttribute("usuarioMod") UsuarioRegistroDTO RegistroDTO, Model model) {
+        Usuario usuarioR = usuarioService.buscarUsuario(RegistroDTO.getCorreo());
+        String rol = usuarioR.getRoles().iterator().next().getName();
 
-    /**
-     * Registra un usuario con el rol "DOCENTE".
-     *
-     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información
-     *                    del usuario a registrar.
-     * @return Redirige a la página "docente" con un mensaje de éxito o fracaso.
-     */
-    @PostMapping("/docente")
-    public String registrarUsuarioD(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO) {
-        try {
-            if (usuarioService.guardar(RegistroDTO, "DOCENTE") != null) {
-                return "redirect:/docente?success";
+        if (rol.equals("ADMIN")) {
+            try {
+                if (usuarioService.modificar(RegistroDTO, "ADMIN")) {
+                    Usuario usuario = null;
+                    model.addAttribute("usuarioMod", usuario);
+                    model.addAttribute("modificarA", false);
+                    model.addAttribute("rol", "SUPERADMIN");
+                    return "redirect:/admin?successChangeA#tools";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failure#tools";
             }
-        } catch (Exception e) {
-            return "redirect:/docente?failure";
+            return "redirect:/admin?failureA#tools";
         }
-        return "redirect:/docente?failure";
-    }
-
-    /**
-     * Registra un usuario con el rol "ESTUDIANTE".
-     *
-     * @param RegistroDTO Un objeto UsuarioRegistroDTO que contiene la información
-     *                    del usuario a registrar.
-     * @return Redirige a la página "estudiante" con un mensaje de éxito o fracaso.
-     */
-    @PostMapping("/estudiante")
-    public String registrarUsuarioE(@ModelAttribute("usuarioresgistro") UsuarioRegistroDTO RegistroDTO) {
-        try {
-            if (usuarioService.guardar(RegistroDTO, "ESTUDIANTE") != null) {
-                return "redirect:/estudiante?success";
+        if (rol.equals("DOCENTE")) {
+            try {
+                if (usuarioService.modificar(RegistroDTO, "DOCENTE")) {
+                    Usuario usuario = null;
+                    model.addAttribute("usuarioMod", usuario);
+                    model.addAttribute("modificarD", false);
+                    model.addAttribute("rol", "SUPERADMIN");
+                    return "redirect:/admin?successChangeD#tools";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failureD#tools";
             }
-        } catch (Exception e) {
-            return "redirect:/estudiante?failure";
+            return "redirect:/admin?failureD#tools";
         }
-        return "redirect:/estudiante?failure";
+        if (rol.equals("ESTUDIANTE")) {
+            try {
+                if (usuarioService.modificar(RegistroDTO, "ESTUDIANTE")) {
+                    Usuario usuario = null;
+                    model.addAttribute("usuarioMod", usuario);
+                    model.addAttribute("modificarE", false);
+                    model.addAttribute("rol", "SUPERADMIN");
+                    return "redirect:/admin?successChangeE#tools";
+                }
+            } catch (Exception e) {
+                return "redirect:/admin?failureE#tools";
+            }
+            return "redirect:/admin?failureE#tools";
+        }
+        return "redirect:/admin?failureA#tools";
     }
 
 }
