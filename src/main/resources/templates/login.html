@@ -7,28 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" th:href="@{sources/images/icon.webp}" type="image/webp">
     <title>Portal de Estudio José de Alejandría</title>
 </head>
 <body>
     <div class="container" id="container">
         <div class="form-container image-container">
-            <img src="sources/images/img.jpg" th:src="@{/sources/images/img.jpg}" alt="imagen estudiante"> <!--Se crea una etiqueta de imagen con una ruta de origen de la imagen y un atributo alt para la imagen-->
+            <img src="sources/images/img.webp" th:src="@{/sources/images/img.webp}" alt="imagen estudiante"> <!--Se crea una etiqueta de imagen con una ruta de origen de la imagen y un atributo alt para la imagen-->
         </div>
         <div class="form-container sign-in-container">
             <form th:action="@{/login}" method="post" onsubmit="validate(event)">
 		<!--Se crea el ingreso con lo requerido, creando botones de ingreso-->
-                <h1>Ingreso</h1>
+                <h1 class="tittle-menu">Inicio sesión</h1>
                 <input type="text" placeholder="Correo" name="username" required id="username"/>
                 <input type="password" placeholder="Contraseña" name="password" minlength="8" maxlength="12" id="password" required/>
                 <button type="submit">Ingresar</button>
                 <br>
-                <label for="connected" class="form-check-label">Ver clave</label>
-                <input
-                type="checkbox"
-                name="connected"
-                class="form-check-input"
-                onclick="mostrar()"
-                />
+                <div class="checkbox-pass">
+                    <input
+                    type="checkbox"
+                    name="connected"
+                    class="form-check-input"
+                    onclick="mostrar()"
+                    />
+                    <label for="connected" class="form-check-label">Ver clave</label>
+                </div>
             </form>
 
         </div>
