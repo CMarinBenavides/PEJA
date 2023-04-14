@@ -14,12 +14,12 @@ body {
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
   height: 100vh;
-  background-image: url("../sources/images/background.jpg");
+  background-image: url("../sources/images/background.webp");
   background-repeat: no-repeat;
   background-size: cover;
   backdrop-filter: blur(1.2vh);
   color: #222;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 
 h1 {
@@ -97,9 +97,9 @@ input {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 768px;
+  width: 60vw;
   max-width: 100%;
-  min-height: 480px;
+  min-height: 60vh;
 }
 
 .form-container {
@@ -258,4 +258,46 @@ footer i {
 footer a {
   color: #3c97bf;
   text-decoration: none;
+}
+
+/*------------estilos menu------------*/
+
+button[type="submit"] {
+  background-color: #1f13da;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.tittle-menu {
+  font-size: 35px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.checkbox-pass {
+  width: 90%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-pass input {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+}
+
+.checkbox-pass label {
+  font-size: 14px;
+  font-weight: bold;
 }

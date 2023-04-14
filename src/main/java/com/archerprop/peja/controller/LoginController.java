@@ -36,7 +36,8 @@ public class LoginController {
                 || authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ADMIN"))) {
             return "redirect:/admin";
         }
-        if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("USER"))) {
+        if (authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("DOCENTE"))
+                || authentication.getAuthorities().stream().anyMatch(r -> r.getAuthority().equals("ESTUDIANTE"))) {
             return "redirect:/user";
         }
         return "redirect:/login";

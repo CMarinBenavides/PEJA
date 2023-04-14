@@ -38,8 +38,8 @@ public class WebSecurityConfig {
                 .csrf(withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/js/**", "/css/**", "/sources/**").permitAll()
-                        .requestMatchers("/admin/*").hasAnyAuthority("ADMIN", "SUPERADMIN")
-                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/admin/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
+                        .requestMatchers("/user/**").hasAnyAuthority("DOCENTE", "ESTUDIANTE")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
