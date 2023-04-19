@@ -101,7 +101,7 @@
                             <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}" th:if="${modificarA} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
                               <div class="form-floating mb-3"> <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"> <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1" max="999999999999"> <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
                                 <label for="cedula">Cedula</label>
                               </div>
                               <div class="form-floating mb-3">
@@ -236,7 +236,7 @@
                             <form th:action="@{/registro/docente}" method="post" th:object="${usuarioregistro}" th:if="${modificarD} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
                               <div class="form-floating mb-3"> <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"> <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1" max="999999999999"> <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
                                 <label for="cedula">Cedula</label>
                               </div>
                               <div class="form-floating mb-3">
@@ -375,7 +375,7 @@
                             <form th:action="@{/registro/docente}" method="post" th:object="${usuarioregistro}" th:if="${modificarD} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
                               <div class="form-floating mb-3"> <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" > <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1" max="999999999999"> <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
                                 <label for="cedula">Cedula</label>
                               </div>
                               <div class="form-floating mb-3">
@@ -512,7 +512,7 @@
                             <form th:action="@{/registro/estudiante}" method="post" th:object="${usuarioregistro}" th:if="${modificarE} == false" onsubmit="validate(event)"> <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
                               <div class="form-floating mb-3"> <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" > <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+                                <input type="number" class="form-control" id="cedula" required placeholder="1111111111" th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1" max="999999999999"> <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
                                 <label for="cedula">Tarjeta de identidad</label>
                               </div>
                               <div class="form-floating mb-3">

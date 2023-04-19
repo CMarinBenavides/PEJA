@@ -63,7 +63,10 @@ public class UsuarioServiceImpl implements UsuarioService {
                 || registroDTO.getCorreo() == null
                 || registroDTO.getCorreo().length() <= 0
                 || registroDTO.getCorreo().length() > 50
-                || !matcher.matches()) {
+                || !matcher.matches()
+                || registroDTO.getClave() == null
+                || registroDTO.getClave().length() <= 7
+                || registroDTO.getClave().length() > 12) {
             return null;
         }
         Usuario usuario = new Usuario(

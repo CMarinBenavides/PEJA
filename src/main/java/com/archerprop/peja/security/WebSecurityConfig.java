@@ -37,6 +37,7 @@ public class WebSecurityConfig {
         })
                 .csrf(withDefaults())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/form/**").permitAll()
                         .requestMatchers("/js/**", "/css/**", "/sources/**").permitAll()
                         .requestMatchers("/admin/**").hasAnyAuthority("ADMIN", "SUPERADMIN")
                         .requestMatchers("/user/**").hasAnyAuthority("DOCENTE", "ESTUDIANTE")
