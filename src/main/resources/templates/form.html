@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <h1>Formulario de registro</h1> <!--Se define el título del documento-->
-                <form th:action="@{/registro}" method="post" th:object="${usuario}">
+                <form th:action="@{/registro/superadmin}" method="post" th:object="${usuarioregistro}">
                     <div class="form-group"> <!--Se crea formulario con cada uno de los siguientes id´s-->
                         <label for="cedula">Id</label>
                         <input type="number" class="form-control" id="cedula" th:field="*{cedula}" required autofocus="autofocus">

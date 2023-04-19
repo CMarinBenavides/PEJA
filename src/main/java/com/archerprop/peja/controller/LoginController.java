@@ -53,4 +53,8 @@ public class LoginController {
         return new UsuarioRegistroDTO();
     }
 
+    @GetMapping("/form")
+    public String form() {
+        return "form";
+    }
 }

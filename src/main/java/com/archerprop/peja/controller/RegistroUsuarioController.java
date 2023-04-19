@@ -79,6 +79,15 @@ public class RegistroUsuarioController {
                 return "redirect:/admin?failureE#tools";
             }
             return "redirect:/admin?failureE#tools";
+        } else if (rol.equals("superadmin")) {
+            try {
+                if (usuarioService.guardar(RegistroDTO, "SUPERADMIN") != null) {
+                    return "redirect:/form?successSA#tools";
+                }
+            } catch (Exception e) {
+                return "redirect:/form?failureSA#tools";
+            }
+            return "redirect:/form?failureSA#tools";
         }
         return "redirect:/admin?failureE";
     }

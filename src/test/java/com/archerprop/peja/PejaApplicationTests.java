@@ -17,13 +17,9 @@ class PejaApplicationTests {
 	private UsuarioService usuarioService;
 
 	@Test
-	void contextLoads() {
-	}
-
-	@Test
 	void testServiceSave() {
 		UsuarioRegistroDTO usuarioRegistroDTO = new UsuarioRegistroDTO();
-		usuarioRegistroDTO.setCedula(Long.parseLong("1234567890"));
+		usuarioRegistroDTO.setCedula(Long.parseLong("334455"));
 		usuarioRegistroDTO.setNombre("TestUno");
 		usuarioRegistroDTO.setApellido("TestUno");
 		usuarioRegistroDTO.setCorreo("TesUno@gmail.com");
@@ -49,7 +45,7 @@ class PejaApplicationTests {
 	@Test
 	void testServiceSaveValidaCedula() {
 		UsuarioRegistroDTO usuarioRegistroDTO = new UsuarioRegistroDTO();
-		usuarioRegistroDTO.setCedula(Long.parseLong("123456789"));
+		usuarioRegistroDTO.setCedula(Long.parseLong("1234567891212"));
 		usuarioRegistroDTO.setNombre("TestTres");
 		usuarioRegistroDTO.setApellido("TestTres");
 		usuarioRegistroDTO.setCorreo("testTres@gmail.com");
@@ -61,7 +57,7 @@ class PejaApplicationTests {
 	@Test
 	void testServiceSaveYaExisteCedula() {
 		UsuarioRegistroDTO usuarioRegistroDTO = new UsuarioRegistroDTO();
-		usuarioRegistroDTO.setCedula(Long.parseLong("1234567891"));
+		usuarioRegistroDTO.setCedula(Long.parseLong("1234567123"));
 		usuarioRegistroDTO.setNombre("TestCuatro");
 		usuarioRegistroDTO.setApellido("TestCuatro");
 		usuarioRegistroDTO.setCorreo("testCuatro@gmail.com");
@@ -70,7 +66,7 @@ class PejaApplicationTests {
 		usuarioService.guardar(usuarioRegistroDTO, "ADMIN");
 
 		UsuarioRegistroDTO usuarioRegistroDTO2 = new UsuarioRegistroDTO();
-		usuarioRegistroDTO2.setCedula(Long.parseLong("1234567891"));
+		usuarioRegistroDTO2.setCedula(Long.parseLong("1234567123"));
 		usuarioRegistroDTO2.setNombre("TestCinco");
 		usuarioRegistroDTO2.setApellido("TestCinco");
 		usuarioRegistroDTO2.setCorreo("Test5@gmail.com");
