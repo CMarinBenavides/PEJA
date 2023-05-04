@@ -31,4 +31,8 @@ public class Tareas implements Serializable {
     private String archivoEntregado;
     private String tipoEntregado;
 
+    public void finalize() throws Throwable {
+
+    }
+
 }

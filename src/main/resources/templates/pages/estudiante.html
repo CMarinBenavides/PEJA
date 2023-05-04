@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--Se está configurando la estructura básica de una página HTML y cargando varios recursos, incluyendo una hoja de estilos CSS llamada "user-style.css" y una versión minificada del framework Bootstrap.-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/user-style.css" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/card.css">
+  <script src="javascript/smooth-scroll.polyfills.min.js"></script>
+  <script>
+    <!--se está inicializando un objeto que hace uso de esa librería para habilitar el efecto de desplazamiento suave en todos los enlaces de la página que contengan un fragmento de URL que coincida con algún identificador de sección en la página.-->
+    var scroll = new SmoothScroll('a[href*="#"]');
+  </script>
+  <title>Portal de Estudio José de Alejandría</title>
+</head>
+
+<body>
+  <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+  <!--Se esta creando un parrafo el cual esta dando la bienvenida al usuario-->
+  <div class="hero">
+    <div class="container">
+      <h1>Bienvenido</h1>
+      <p><q>Si haces planes para un año, siembra arroz. Si los haces por dos lustros, planta árboles. Si los haces para
+          toda la vida, educa una persona.</q><br> Proverbio chino</p>
+    </div>
+  </div>
+
+  <section id="tools" class="container content">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+          role="tab" aria-controls="home" aria-selected="true">Tareas</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+          role="tab" aria-controls="profile" aria-selected="false">Calificaciones</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent" style="margin:30px 30px">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="card">
+          <div class="card-header animated-bg" id="header">
+            <img src="sources/images/task.jpg" alt="tarea">
+          </div>
+          <!--El código está creando una sección de tarjeta de tarea que consta de un título con un enlace, una descripción y la información del profesor que la asignó. La sección también incluye una imagen de perfil del profesor. -->
+          <div class="card-content">
+            <h3 class="card-title animated-bg animated-bg-text" id="title">
+              <a href="#">nombre tarea</a>
+            </h3>
+            <p class="card-excerpt" id="excerpt">
+              descripcion
+            </p>
+            <div class="author">
+              <div class="profile-img animated-bg" id="profile_img"><img
+                  src="https://randomuser.me/api/portraits/men/45.jpg" alt=""></div>
+              <div class="author-info">
+                <strong class="animated-bg animated-bg-text" id="name">nombre profesor</strong>
+                <small class="animated-bg animated-bg-text" id="date">Oct 08, 2020</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">lista</div>
+    </div>
+  </section>
+  <script src="javascript/jquery-3.6.0.min.js"></script>
+  <script src="/javascript/bootstrap.bundle.min.js"></script>
+  <script th:replace="~{fragments/navbar.html :: navbar_js}"></script>
+
+</body>
+
+</html>

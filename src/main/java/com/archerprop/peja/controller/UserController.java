@@ -10,6 +10,6 @@ public class UserController {
 
     @GetMapping
     public String user() {
-        return "estudiante";
+        return "pages/estudiante";
     }
 }

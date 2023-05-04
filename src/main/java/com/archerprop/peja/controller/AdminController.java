@@ -56,7 +56,7 @@ public class AdminController {
         model.addAttribute("modificarD", false);
         model.addAttribute("modificarE", false);
 
-        return "admin";
+        return "pages/admin";
     }
 
     /**
@@ -112,15 +112,15 @@ public class AdminController {
         model.addAttribute("rol", "SUPERADMIN");
         if (rol.equals("ADMIN")) {
             model.addAttribute("modificarA", true);
-            return "admin";
+            return "pages/admin";
         } else if (rol.equals("DOCENTE")) {
             model.addAttribute("modificarD", true);
-            return "admin";
+            return "pages/admin";
         } else if (rol.equals("ESTUDIANTE")) {
             model.addAttribute("modificarE", true);
-            return "admin";
+            return "pages/admin";
         }
-        return "admin";
+        return "pages/admin";
     }
 
     /**

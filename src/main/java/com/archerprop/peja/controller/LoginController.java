@@ -18,7 +18,7 @@ public class LoginController {
      */
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "pages/login";
     }
 
     /**
@@ -55,6 +55,6 @@ public class LoginController {
 
     @GetMapping("/form")
     public String form() {
-        return "form";
+        return "pages/form";
     }
 }

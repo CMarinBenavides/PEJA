@@ -1,0 +1,16 @@
+<nav class="nav navbar" th:fragment="nav_bar">
+    <div class="container">
+        <div class="logo">
+            <div class="tittle-logo"><a th:href="@{/admin}"><img th:src="@{/sources/images/icon.webp}"
+                        alt="logo">PEJA</a></div><span class="subtittle-mini">Portal de Estudio Jose de
+                Alejandria</span>
+        </div>
+        <ul>
+            <li><a href="#" class="current">Inicio</a></li>
+            <li><a href="#tools">Herramientas</a></li>
+            <li><a class="btn btn-outline-light" th:href="@{/logout}">Salir</a></li>
+        </ul>
+    </div>
+</nav>
+
+<script th:fragment="navbar_js" src="js/navbar.js" th:src="@{/js/navbar.js}"></script>
