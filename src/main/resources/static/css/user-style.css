@@ -11,6 +11,7 @@ body {
   font-family: "Open Sans", sans-serif;
   color: #4b4b4b;
   padding-bottom: 40px;
+  overflow-x: hidden;
 }
 
 .container {
@@ -46,14 +47,18 @@ body {
   margin-bottom: 0;
 }
 
-.navbar a {
+.nav.navbar ul li a {
   color: #fff;
   text-decoration: none;
   padding: 7px 15px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
 }
-.nav.nav.navbar a.btn:hover {
-  color: #34495e;
+.nav.navbar ul li a:hover {
+  font-size: 17px;
 }
 
 .navbar.active {
@@ -224,4 +229,31 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .paginate_button .page-link:hover {
   color: #39555c;
+}
+
+/*------------form styles------------*/
+
+#showPassword {
+  position: relative;
+  top: -40px;
+  left: 95%;
+  cursor: pointer;
+}
+
+#showPassword span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+#showPassword i {
+  color: #62929e;
 }

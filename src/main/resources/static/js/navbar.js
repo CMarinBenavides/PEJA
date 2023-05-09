@@ -1,5 +1,6 @@
 const nav = document.querySelector('.nav') // se guarda en una variable constante nav con un atributo obtenido del HTML. Esto depende del atributo que tenga el identificar .nav
 const hero = document.querySelector('.hero') // se guarda en una variable constante img con un atributo obtenido del HTML. Esto depende del atributo que tenga el identificar .hero
+window.addEventListener('DOMContentLoaded', fixNav) //está permitiendo agregar un efecto de "DOMContentLoaded" fijo a un elemento de navegación en una página web.')
 window.addEventListener('scroll', fixNav) //está permitiendo agregar un efecto de "scroll" fijo a un elemento de navegación en una página web.
 
 
