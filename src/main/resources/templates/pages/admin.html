@@ -133,25 +133,85 @@
       });
     });
 
-    //Funciones para mostrar alertas de validación de campos
+    //Funciones para mostrar alertas de validación de campos de Administradores
 
-    //funcion focus y blur para el campo cedula
-    var inputCedula = document.getElementById("cedula");
-    inputCedula.onfocus = function () {
+    //funcion focus y blur para el campo cedulaAdmin
+    var inputCedulaAdmin = document.getElementById("cedulaAdmin");
+    inputCedulaAdmin.onfocus = function () {
       // desactivamos la alerta mientras hay focus en el input
-      var alertDangerDni = document.getElementById("alertDangerDni");
-      alertDangerDni.style.display = "none";
+      var alertDangerDniAdmin = document.getElementById("alertDangerDniAdmin");
+      alertDangerDniAdmin.style.display = "none";
 
-      var alertInfoDni = document.getElementById("alertInfoDni");
-      alertInfoDni.style.display = "block";
+      var alertInfoDniAdmin = document.getElementById("alertInfoDniAdmin");
+      alertInfoDniAdmin.style.display = "block";
     };
-    inputCedula.onblur = function () {
-      if (inputCedula.value == "") {
-        var alertDangerDni = document.getElementById("alertDangerDni");
-        alertDangerDni.style.display = "block";
+    inputCedulaAdmin.onblur = function () {
+      if (inputCedulaAdmin.value == "") {
+        var alertDangerDniAdmin = document.getElementById("alertDangerDniAdmin");
+        alertDangerDniAdmin.style.display = "block";
       }
-      var alertInfoDni = document.getElementById("alertInfoDni");
-      alertInfoDni.style.display = "none";
+      var alertInfoDniAdmin = document.getElementById("alertInfoDniAdmin");
+      alertInfoDniAdmin.style.display = "none";
+    };
+
+    //funcion focus y blur para el campo nombreAdmin
+    var inputNombreAdmin = document.getElementById("nombreAdmin");
+    inputNombreAdmin.onfocus = function () {
+      // desactivamos la alerta mientras hay focus en el input
+      var alertDangerNombreAdmin = document.getElementById(
+        "alertDangerNombreAdmin"
+      );
+      alertDangerNombreAdmin.style.display = "none";
+    };
+    inputNombreAdmin.onblur = function () {
+      if (inputNombreAdmin.value == "") {
+        var alertDangerNombreAdmin = document.getElementById(
+          "alertDangerNombreAdmin"
+        );
+        alertDangerNombreAdmin.style.display = "block";
+      }
+    };
+
+    //funcion focus y blur para el campo apellidoAdmin
+    var inputApellidoAdmin = document.getElementById("apellidoAdmin");
+    inputApellidoAdmin.onfocus = function () {
+      // desactivamos la alerta mientras hay focus en el input
+      var alertDangerApellidoAdmin = document.getElementById(
+        "alertDangerApellidoAdmin"
+      );
+      alertDangerApellidoAdmin.style.display = "none";
+    };
+    inputApellidoAdmin.onblur = function () {
+      if (inputApellidoAdmin.value == "") {
+        var alertDangerApellidoAdmin = document.getElementById(
+          "alertDangerApellidoAdmin"
+        );
+        alertDangerApellidoAdmin.style.display = "block";
+      }
+    };
+
+
+    //funcion focus y blur para el campo cedulaDocente
+    var inputCedulaDocente = document.getElementById("cedulaDocente");
+    inputCedulaDocente.onfocus = function () {
+      // desactivamos la alerta mientras hay focus en el input
+      var alertDangerDniDocente = document.getElementById(
+        "alertDangerDniDocente"
+      );
+      alertDangerDniDocente.style.display = "none";
+
+      var alertInfoDniDocente = document.getElementById("alertInfoDniDocente");
+      alertInfoDniDocente.style.display = "block";
+    };
+    inputCedulaDocente.onblur = function () {
+      if (inputCedulaDocente.value == "") {
+        var alertDangerDniDocente = document.getElementById(
+          "alertDangerDniDocente"
+        );
+        alertDangerDniDocente.style.display = "block";
+      }
+      var alertInfoDniDocente = document.getElementById("alertInfoDniDocente");
+      alertInfoDniDocente.style.display = "none";
     };
 
     //funcion focus y blur para el campo nombre
@@ -276,8 +336,8 @@
 
     //Funcion para quitar las alertas de validación de campos
     function resetAlerts() {
-      var alertDangerDni = document.getElementById("alertDangerDni");
-      alertDangerDni.style.display = "none";
+      var alertDangerDniAdmin = document.getElementById("alertDangerDniAdmin");
+      alertDangerDniAdmin.style.display = "none";
 
       var alertDangerNombre = document.getElementById("alertDangerNombre");
       alertDangerNombre.style.display = "none";

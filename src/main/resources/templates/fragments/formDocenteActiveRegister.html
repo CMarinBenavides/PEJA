@@ -104,7 +104,10 @@
                             <div class="alert alert-info" style="display: none;" id="alertInfoClave">
                                 La clave no debe contener caracteres especiales, ni espacios en blanco.
                                 <br>
-                                La clave debe tener entre 8 y 12 caracteres.
+                                La longitud minima es de 8 caracteres <span id="checkMin"
+                                    style="visibility: hidden;"></span>
+                                <br>
+                                La longitud maxima es de 12 caracteres <span id="checkMax"></span>
                             </div>
                             <div class="alert alert-danger" id="alertDangerClave" style="display: none;">
                                 Ingrese una clave
@@ -126,28 +129,54 @@
                                 th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
                                 min="1" max="999999999999">
                             <label for="cedula">Cedula</label>
+                            <div class="alert alert-info" id="alertInfoDni" style="display: none;">
+                                El documento de identidad de ser de formato: 1111111111
+                            </div>
+                            <div class="alert alert-danger" id="alertDangerDni" style="display: none;">
+                                Ingrese un documento de identidad
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="nombre" placeholder="Pepito"
                                 th:field="*{nombre}" required>
                             <label for="nombre">Nombre</label>
+                            <div class="alert alert-danger" id="alertDangerNombre" style="display: none;">
+                                Ingrese un nombre
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="apellido" placeholder="Pepo"
                                 th:field="*{apellido}" required>
                             <label for="apellido">Apellido</label>
+                            <div class="alert alert-danger" id="alertDangerApellido" style="display: none;">
+                                Ingrese un apellido
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="correo" placeholder="name@example.com"
                                 th:field="*{correo}" required readonly onmousedown="return false;">
                             <!--Elemento con clase form-floating mb-3que contiene un input elemento de tipo email con id correo, texto de marcador de posición " nombre@ejemplo.com " y atributo obligatorio. También tiene un th:fieldatributo con la expresión *{correo}que vincula el valor de entrada a la correopropiedad del usuarioregistroobjeto. El autofocusatributo establece el foco en esta entrada cuando se carga la página, y el disabledatributo deshabilita el campo de entrada para que no se pueda editar. También tiene un labelelemento que muestra la etiqueta "Correo" para esta entrada.-->
                             <label for="correo">Correo</label>
+                            <div class="alert alert-danger" id="alertDangerCorreo" style="display: none;">
+                                Ingrese un correo
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="clave" placeholder="12345678"
                                 th:field="*{clave}" required minlength="8" maxlength="12">
                             <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
                             <label for="clave">Clave</label>
+                            <div class="alert alert-info" style="display: none;" id="alertInfoClave">
+                                La clave no debe contener caracteres especiales, ni espacios en blanco.
+                                <br>
+                                La longitud minima es de 8 caracteres <span id="checkMin"
+                                    style="visibility: hidden;"></span>
+                                <br>
+                                La longitud maxima es de 12 caracteres <span id="checkMax"></span>
+                            </div>
+                            <div class="alert alert-danger" id="alertDangerClave" style="display: none;">
+                                Ingrese una clave
+                            </div>
                         </div>
                         <br>
                         <!--Aqui se encuentran dos botones de "modificar" y "Cancelar" donde el usuario puede modificar ciertos datos y tiene la opción de cancelar la operación.-->
