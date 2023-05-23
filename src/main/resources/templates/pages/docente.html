@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<!--Se está configurando la estructura básica de una página HTML y cargando varios recursos, incluyendo una hoja de estilos CSS llamada "user-style.css" y una versión minificada del framework Bootstrap.-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+  <meta charset="UTF-8" />
+  <!--Esto especifica la codificación de caracteres utilizada en el documento, que es UTF-8 en este caso.-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Esta metaetiqueta se usa para especificar cómo se debe representar el contenido en diferentes dispositivos.-->
+  <link rel="stylesheet" href="css/user-style.css" th:href="@{/css/user-style.css}" />
+  <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo llamado "user-style.css".-->
+  <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <!--Esta es otra etiqueta de enlace que enlaza con una versión diferente del archivo CSS de Bootstrap que se carga desde una CDN (red de entrega de contenido). -->
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
+  <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo para un conjunto de iconos.-->
+  <link rel="shortcut icon" th:href="@{/sources/images/icon.webp}" type="image/webp" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+  <title>Portal de Estudio José de Alejandría</title>
+  <!--Este es el título de la página web que se muestra en la barra de título del navegador.-->
+</head>
+
+<body>
+  <!--se está creando una barra de navegación con un logotipo (que es un enlace a la página "admin.html") y un menú con tres opciones: "Inicio", "Herramientas" y "Salida". "Inicio" y "Herramientas"-->
+  <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+  <div class="hero">
+    <!--Se esta creando un parrafo el cual esta dando la bienvenida al usuario-->
+    <div class="container">
+      <h1>Bienvenido</h1>
+      <p><q>Si haces planes para un año, siembra arroz. Si los haces por dos lustros, planta árboles. Si los haces para
+          toda la vida, educa una persona.</q><br> Proverbio chino</p>
+    </div>
+  </div>
+
+  <!--En las siguientes lineas se esta está creando una sección con tres pestañas o tabs. Cada pestaña muestra un contenido diferente al hacer clic en ella. Las pestañas están creadas usando la clase "nav-tabs" y los botones para cada pestaña se crean con la clase "nav-link". Se utiliza la biblioteca Bootstrap para lograr esta funcionalidad.-->
+  <section id="tools" class="container content">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+          role="tab" aria-controls="home" aria-selected="true">Adicionar</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+          role="tab" aria-controls="profile" aria-selected="false">Tareas</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+          role="tab" aria-controls="contact" aria-selected="false">Estudiantes</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent" style="margin:30px 30px">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div th:if="${param.successChangeT}">
+          <div class="alert alert-info">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+              <use xlink:href="#check-circle-fill" />
+            </svg>
+            Se ha modificado con exito.
+          </div>
+        </div>
+        <div th:if="${param.successDeleteT}">
+          <div class="alert alert-info">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+              <use xlink:href="#check-circle-fill" />
+            </svg>
+            Se ha eliminado con exito.
+          </div>
+        </div>
+        <div th:if="${param.successT}">
+          <div class="alert alert-info">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+              <use xlink:href="#check-circle-fill" />
+            </svg>
+            Se ha creado correctamente.
+          </div>
+        </div>
+        <div th:if="${param.failureT}">
+          <div class="alert alert-danger">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+              <use xlink:href="#exclamation-triangle-fill" />
+            </svg>
+            Ha ocurrido un error.
+          </div>
+        </div>
+        <p class="text-center fs-2 p-3">Formulario de registro de tareas</p>
+        <form th:action="@{/user/registrar/tarea}" method="post" th:object="${tarea}" th:if="${modificarTarea} == false"
+          onsubmit="checkInput(event)">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="titulo" placeholder="ejemplo" th:field="*{titulo}" required>
+            <label for="titulo">Titulo</label>
+            <div class="alert alert-danger" id="alertDangerTitulo" style="display: none;">
+              Ingrese el titulo de la tarea.
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="descripcion" placeholder="Ejemplo descripción"
+              th:field="*{descripcion}" required>
+            <label for="descripcion">Descripción</label>
+            <div class="alert alert-danger" id="alertDangerDescripcion" style="display: none;">
+              Ingrese la descripcion de la tarea.
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaEntrega" th:field="*{fechaEntrega}" required>
+            <label for="fechaEntrega">Fecha de entrega</label>
+            <div class="alert alert-danger" id="alertDangerFechaEntrega" style="display: none;">
+              Ingrese la fecha de entrega
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="time" class="form-control" id="horaEntrega" th:field="*{horaEntrega}" required>
+            <label for="horaEntrega">Hora de entrega</label>
+            <div class="alert alert-danger" id="alertDangerHoraEntrega" style="display: none;">
+              Ingrese una hora de entrega
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Crear</button>
+            <!-- Se genera el apartado registrar usuario-->
+            <button type="reset" class="btn btn-danger">Borrar</button>
+            <!-- Se genera el apartado borrar usuario-->
+          </div>
+
+        </form>
+        <form th:action="@{/user/modificar}" method="post" th:object="${tareaMod}" th:if="${modificarTarea} == true"
+          onsubmit="checkInput(event)">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="tituloMod" placeholder="ejemplo" th:field="*{titulo}" required>
+            <label for="tituloMod">Titulo</label>
+            <div class="alert alert-danger" id="alertDangerTituloMod" style="display: none;">
+              Ingrese el titulo de la tarea.
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="descripcionMod" placeholder="Ejemplo descripción"
+              th:field="*{descripcion}" required>
+            <label for="descripcionMod">Descripción</label>
+            <div class="alert alert-danger" id="alertDangerDescripcionMod" style="display: none;">
+              Ingrese la descripcion de la tarea.
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaEntregaMod" th:field="*{fechaEntrega}" required>
+            <label for="fechaEntregaMod">Fecha de entrega</label>
+            <div class="alert alert-danger" id="alertDangerFechaEntregaMod" style="display: none;">
+              Ingrese la fecha de entrega
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="time" class="form-control" id="horaEntregaMod" th:field="*{horaEntrega}" required>
+            <label for="horaEntregaMod">Hora de entrega</label>
+            <div class="alert alert-danger" id="alertDangerHoraEntregaMod" style="display: none;">
+              Ingrese una hora de entrega
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Modificar</button>
+            <a class="btn btn-danger" th:href="@{/user/docente/cancel}">Cancelar</a>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <p class="text-center fs-2 p-3">Lista de tareas</p>
+        <!--la etiqueta final de un elemento de formulario que se utiliza para modificar la información del usuario.-->
+        <table class="table table-bordered" id="tablaTareasDocente">
+          <thead>
+            <tr>
+              <!--Elemento div con clase "contenido de pestaña" que contiene dos paneles de pestañas, uno con id "v-pills-addAdmin" y otro con id "v-pills-listAdmin".-->
+              <th scope="col">Titulo</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Fecha de entrega</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--Elemento tbody que contiene un bucle que usa el atributo Thymeleaf th:each para mostrar la información del usuario en las filas de la tabla-->
+            <tr th:each="task : ${tareasPorDocente}">
+              <td th:text="${task.titulo}">ND</td>
+              <td th:text="${task.descripcion}">ND</td>
+              <td><span th:text="${task.fechaEntrega}"></span> <span th:text="${task.horaEntrega}"></span></td>
+              <td>
+                <a th:href="@{/user/docente/}+${task.id}+@{#tools}" style="text-decoration:none;color:#000"><i
+                    class="fi fi-rr-pencil"></i></a>
+                <a th:href="@{/user/docente/}+${task.id}+@{/delete#tools}" style="text-decoration:none;color:#000"><i
+                    class="fi fi-rr-trash"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <p class="text-center fs-2 p-3">Lista de estudiantes</p>
+        <table class="table table-bordered" id="tablaEstudiantes">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Cedula</th>
+              <th scope="col">Correo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="estudiante : ${estudiantes}">
+              <td th:text="${estudiante.nombre}">ND</td>
+              <td th:text="${estudiante.apellido}">ND</td>
+              <td th:text="${estudiante.cedula}">ND</td>
+              <td th:text="${estudiante.correo}">ND</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <script src="js/jquery-3.6.4.min.js" th:src="@{/js/jquery-3.6.4.min.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script th:replace="~{fragments/navbar.html :: navbar_js}"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#tablaTareasDocente').DataTable({
+        language: {
+          url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json",
+        },
+        lengthMenu: [
+          [5, 10, 15, 100],
+          [5, 10, 15, 100],
+        ],
+      });
+
+
+    });
+
+
+    //funciones para validar los campos del formulario
+
+    var inputTitulo = document.getElementById("titulo");
+    if (inputTitulo != null) {
+      inputTitulo.onfocus = function () {
+        document.getElementById("alertDangerTitulo").style.display = "none";
+      };
+      inputTitulo.onblur = function () {
+        if (inputTitulo.value == "") {
+          document.getElementById("alertDangerTitulo").style.display = "block";
+        }
+      };
+    }
+
+    var inputDescripcion = document.getElementById("descripcion");
+    if (inputDescripcion != null) {
+      inputDescripcion.onfocus = function () {
+        document.getElementById("alertDangerDescripcion").style.display = "none";
+      };
+      inputDescripcion.onblur = function () {
+        if (inputDescripcion.value == "") {
+          document.getElementById("alertDangerDescripcion").style.display = "block";
+        }
+      };
+    }
+
+    var inputFechaEntrega = document.getElementById("fechaEntrega");
+    if (inputFechaEntrega != null) {
+      inputFechaEntrega.onfocus = function () {
+        document.getElementById("alertDangerFechaEntrega").style.display = "none";
+      };
+      inputFechaEntrega.onblur = function () {
+        if (inputFechaEntrega.value == "") {
+          document.getElementById("alertDangerFechaEntrega").style.display = "block";
+        }
+      };
+    }
+
+    var inputHoraEntrega = document.getElementById("horaEntrega");
+    if (inputHoraEntrega != null) {
+      inputHoraEntrega.onfocus = function () {
+        document.getElementById("alertDangerHoraEntrega").style.display = "none";
+      };
+      inputHoraEntrega.onblur = function () {
+        if (inputHoraEntrega.value == "") {
+          document.getElementById("alertDangerHoraEntrega").style.display = "block";
+        }
+      };
+    }
+
+
+    //funciones para validar los campos del formulario de modificar
+
+    var inputTituloMod = document.getElementById("tituloMod");
+    if (inputTituloMod != null) {
+      inputTituloMod.onfocus = function () {
+        document.getElementById("alertDangerTituloMod").style.display = "none";
+      };
+      inputTituloMod.onblur = function () {
+        if (inputTituloMod.value == "") {
+          document.getElementById("alertDangerTituloMod").style.display = "block";
+        }
+      };
+    }
+
+    var inputDescripcionMod = document.getElementById("descripcionMod");
+    if (inputDescripcionMod != null) {
+      inputDescripcionMod.onfocus = function () {
+        document.getElementById("alertDangerDescripcionMod").style.display = "none";
+      };
+      inputDescripcionMod.onblur = function () {
+        if (inputDescripcionMod.value == "") {
+          document.getElementById("alertDangerDescripcionMod").style.display = "block";
+        }
+      };
+    }
+
+    var inputFechaEntregaMod = document.getElementById("fechaEntregaMod");
+    if (inputFechaEntregaMod != null) {
+      inputFechaEntregaMod.onfocus = function () {
+        document.getElementById("alertDangerFechaEntregaMod").style.display = "none";
+      };
+      inputFechaEntregaMod.onblur = function () {
+        if (inputFechaEntregaMod.value == "") {
+          document.getElementById("alertDangerFechaEntregaMod").style.display = "block";
+        }
+      };
+    }
+
+    var inputHoraEntregaMod = document.getElementById("horaEntregaMod");
+    if (inputHoraEntregaMod != null) {
+      inputHoraEntregaMod.onfocus = function () {
+        document.getElementById("alertDangerHoraEntregaMod").style.display = "none";
+      };
+      inputHoraEntregaMod.onblur = function () {
+        if (inputHoraEntregaMod.value == "") {
+          document.getElementById("alertDangerHoraEntregaMod").style.display = "block";
+        }
+      };
+    }
+  </script>
+</body>
+
+</html>

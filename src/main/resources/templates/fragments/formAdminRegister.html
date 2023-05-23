@@ -1,0 +1,242 @@
+<div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="admin-tab"
+  th:if="${rol == 'SUPERADMIN'}" th:fragment="FormAdminRegister">
+  <div class="d-flex align-items-start">
+    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <button class="nav-link active" id="v-pills-addAdmin-tab" data-bs-toggle="pill" data-bs-target="#v-pills-addAdmin"
+        type="button" role="tab" aria-controls="v-pills-addAdmin" aria-selected="true">Adicionar</button>
+      <button class="nav-link" id="v-pills-listAdmin-tab" data-bs-toggle="pill" data-bs-target="#v-pills-listAdmin"
+        type="button" role="tab" aria-controls="v-pills-listAdmin" aria-selected="false">Lista</button>
+    </div>
+    <div class="tab-content w-100" id="v-pills-tabContent">
+      <!--Las siguientes lineas representan dentro del div del panel activo, hay cuatro elementos div que solo se mostrarán si se cumplen ciertas condiciones, según lo determinado por el atributo Thymeleaf. Si el parámetro "successChange" es verdadero, se mostrará un div de alerta con la clase "alert-info" con un mensaje de éxito que indica que se ha realizado un cambio. Lo mismo ocurre con los parámetros "successDelete" y "success", con diferentes mensajes mostrados en cada caso. Si el parámetro "fallo" es verdadero, se mostrará un div de alerta con la clase "alerta-peligro" con un mensaje que indica que se ha producido un error. -->
+      <div class="tab-pane fade show active p-3" id="v-pills-addAdmin" role="tabpanel"
+        aria-labelledby="v-pills-addAdmin-tab">
+        <div class="col-md-offset-3">
+          <div th:if="${param.successChangeA}">
+            <div class="alert alert-info">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                <use xlink:href="#check-circle-fill" />
+              </svg>
+              Se ha modificado con exito.
+            </div>
+          </div>
+          <div th:if="${param.successDeleteA}">
+            <div class="alert alert-info">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                <use xlink:href="#check-circle-fill" />
+              </svg>
+              Se ha eliminado con exito.
+            </div>
+          </div>
+          <div th:if="${param.successA}">
+            <div class="alert alert-info">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                <use xlink:href="#check-circle-fill" />
+              </svg>
+              Se ha registrado correctamente.
+            </div>
+          </div>
+          <div th:if="${param.failureA}">
+            <div class="alert alert-danger">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                <use xlink:href="#exclamation-triangle-fill" />
+              </svg>
+              Ha ocurrido un error.
+            </div>
+          </div>
+          <p class="text-center fs-2 p-3">Formulario de registro</p>
+          <form th:action="@{/registro/admin}" method="post" th:object="${usuarioregistro}"
+            th:if="${modificarA} == false" onsubmit="checkInput(event)">
+            <!--Inicia un formulario con la acción especificada por el atributo "th:action", método "POST", objeto "usuarioregistro" y validación personalizada de js al enviar el formulario.-->
+            <div class="form-floating mb-3">
+              <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
+              <input type="number" class="form-control" id="cedulaAdmin" placeholder="1111111111" th:field="*{cedula}"
+                onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1" max="999999999999" required>
+              <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
+              <label for="cedulaAdmin">Documento de identidad</label>
+              <div class="alert alert-info" id="alertInfoDniAdmin" style="display: none;">
+                El documento de identidad de ser de formato: 1111111111
+              </div>
+              <div class="alert alert-danger" id="alertDangerDniAdmin" style="display: none;">
+                Ingrese un documento de identidad
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="nombreAdmin" placeholder="Pepito" th:field="*{nombre}"
+                required>
+              <label for="nombreAdmin">Nombre</label>
+              <div class="alert alert-danger" id="alertDangerNombreAdmin" style="display: none;">
+                Ingrese el nombre
+              </div>
+            </div>
+            <!-- Despues de la cedula repite para cada uno de los campos de entrada restantes, con diferentes atributos de "type", "id", "placeholder", "th:field", "label for", etc-->
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="apellidoAdmin" placeholder="Pepo" th:field="*{apellido}"
+                required>
+              <label for="apellidoAdmin">Apellido</label>
+              <div class="alert alert-danger" id="alertDangerApellidoAdmin" style="display: none;">
+                Ingrese el apellido
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="correoAdmin" placeholder="name@example.com"
+                th:field="*{correo}" required>
+              <label for="correoAdmin">Correo</label>
+              <div class="alert alert-info" style="display: none;" id="alertInfoCorreoAdmin">
+                El correo debe tener el formato: example@example.com
+              </div>
+              <div class="alert alert-danger" id="alertDangerCorreoAdmin" style="display: none;">
+                Ingrese el correo
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="claveAdmin" placeholder="12345678" th:field="*{clave}"
+                minlength="8" maxlength="12" required>
+              <div class="input-group-append" id="showPassword">
+                <span class="input-group-text" onclick="password_show_hide();">
+                  <i class="fas fa-eye" id="show_eye"></i>
+                  <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                </span>
+              </div>
+              <label for="claveAdmin">Clave</label>
+              <div class="alert alert-info" style="display: none;" id="alertInfoClaveAdmin">
+                La clave no debe contener caracteres especiales, ni espacios en blanco.
+                <br>
+                La longitud minima es de 8 caracteres <span id="checkMinAdmin" style="visibility: hidden;"></span>
+                <br>
+                La longitud maxima es de 12 caracteres <span id="checkMaxAdmin"></span>
+              </div>
+              <div class="alert alert-danger" id="alertDangerClaveAdmin" style="display: none;">
+                Ingrese una clave
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Registrar</button>
+              <!-- Se genera el apartado registrar usuario-->
+              <button type="reset" class="btn btn-danger" onclick="resetAlerts()">Borrar</button>
+              <!-- Se genera el apartado borrar usuario-->
+            </div>
+          </form>
+
+          <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioMod}" th:if="${modificarA} == true"
+            onsubmit="validate(event)">
+            <div class="form-floating mb-3">
+              <!--input para el campo cedula con id = cedulaAdminMod-->
+              <input type="number" class="form-control" id="dniAdminMod" required placeholder="1111111111"
+                th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1"
+                max="999999999999">
+              <label for="dniAdminMod">Documento de identidad</label>
+              <!--div alerta info con id = alertIndoDniAdminMod-->
+              <div class="alert alert-info" id="alertInfoDniAdminMod" style="display: none;">
+                El documento de identidad de ser de formato: 1111111111
+              </div>
+              <!--div alerta danger con id = alertDangerDniAdminMod-->
+              <div class="alert alert-danger" id="alertDangerDniAdminMod" style="display: none;">
+                Ingrese un documento de identidad
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="nombreAdminMod" placeholder="Pepito" th:field="*{nombre}"
+                required>
+              <label for="nombreAdminMod">Nombre</label>
+              <div class="alert alert-danger" id="alertDangerNombreAdminMod" style="display: none;">
+                Ingrese el nombre
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="apellidoAdminMod" placeholder="Pepo" th:field="*{apellido}"
+                required>
+              <label for="apellidoAdminMod">Apellido</label>
+              <div class="alert alert-danger" id="alertDangerApellidoAdminMod" style="display: none;">
+                Ingrese el apellido
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="correoAdminMod" placeholder="name@example.com"
+                th:field="*{correo}" required readonly>
+              <!--Elemento con clase form-floating mb-3que contiene un input elemento de tipo email con id correo, texto de marcador de posición " nombre@ejemplo.com " y atributo obligatorio. También tiene un th:fieldatributo con la expresión *{correo}que vincula el valor de entrada a la correopropiedad del usuarioregistroobjeto. El autofocusatributo establece el foco en esta entrada cuando se carga la página, y el disabledatributo deshabilita el campo de entrada para que no se pueda editar. También tiene un labelelemento que muestra la etiqueta "Correo" para esta entrada.-->
+              <label for="correoAdminMod">Correo</label>
+              <div class="alert alert-info" style="display: none;" id="alertInfoCorreoAdminMod">
+                El correo debe tener el formato: example@example.com
+              </div>
+              <div class="alert alert-danger" id="alertDangerCorreoAdminMod" style="display: none;">
+                Ingrese el correo
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="claveAdminMod" placeholder="12345678" th:field="*{clave}"
+                required minlength="8" maxlength="12">
+              <div class="input-group-append" id="showPassword">
+                <span class="input-group-text" onclick="password_show_hide();">
+                  <i class="fas fa-eye" id="show_eye"></i>
+                  <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                </span>
+              </div>
+              <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
+              <label for="claveAdminMod">Clave</label>
+              <div class="alert alert-info" style="display: none;" id="alertInfoClaveAdminMod">
+                La clave no debe contener caracteres especiales, ni espacios en blanco.
+                <br>
+                La longitud minima es de 8 caracteres <span id="checkMinAdminMod" style="visibility: hidden;"></span>
+                <br>
+                La longitud maxima es de 12 caracteres <span id="checkMaxAdminMod"></span>
+              </div>
+              <div class="alert alert-danger" id="alertDangerClaveAdminMod" style="display: none;">
+                Ingrese una clave
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Modificar</button>
+              <a class="btn btn-danger" th:href="@{/admin/cancel}">Cancelar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="v-pills-listAdmin" role="tabpanel" aria-labelledby="v-pills-listAdmin-tab">
+        <p class="text-center fs-2 p-3">Lista de administradores</p>
+        <!--la etiqueta final de un elemento de formulario que se utiliza para modificar la información del usuario.-->
+        <table class="table table-bordered" id="tablaA">
+          <thead>
+            <tr>
+              <!--Elemento div con clase "contenido de pestaña" que contiene dos paneles de pestañas, uno con id "v-pills-addAdmin" y otro con id "v-pills-listAdmin".-->
+              <th scope="col">Apellido</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Documento de identidad</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--Elemento tbody que contiene un bucle que usa el atributo Thymeleaf th:each para mostrar la información del usuario en las filas de la tabla-->
+            <tr th:each="user : ${usuariosAdmin}" th:if="${usuariosAdmin != null and !usuariosAdmin.isEmpty()}">
+              <td th:text="${user.apellido}">ND</td>
+              <td th:text="${user.nombre}">ND</td>
+              <td th:text="${user.cedula}">ND</td>
+              <td th:text="${user.correo}">ND</td>
+              <td>
+                <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
+                <a th:href="@{/admin/}+${user.correo}+@{#tools}" style="text-decoration:none;color:#000"><i
+                    class="fi fi-rr-pencil"></i></a>
+                <a th:href="@{/admin/}+${user.correo}+@{/delete#tools}" style="text-decoration:none;color:#000"><i
+                    class="fi fi-rr-trash"></i></a>
+              </td>
+            </tr>
+            <tr th:if="${usuariosAdmin == null or usuariosAdmin.isEmpty()}">
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+              <td>ND</td>
+              <td>
+                <!--Elemento de etiqueta de anclaje para cada fila de la tabla que incluye un atributo href con el enlace apropiado para editar o eliminar el usuario-->
+                <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-pencil"></i></a>
+                <a th:href="@{#}" style="text-decoration:none;color:#000"><i class="fi fi-rr-trash"></i></a>
+              </td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

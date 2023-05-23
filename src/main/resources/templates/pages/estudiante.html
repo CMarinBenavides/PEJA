@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--Se está configurando la estructura básica de una página HTML y cargando varios recursos, incluyendo una hoja de estilos CSS llamada "user-style.css" y una versión minificada del framework Bootstrap.-->
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+  <meta charset="UTF-8" />
+  <!--Esto especifica la codificación de caracteres utilizada en el documento, que es UTF-8 en este caso.-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Esta metaetiqueta se usa para especificar cómo se debe representar el contenido en diferentes dispositivos.-->
+  <link rel="stylesheet" href="css/user-style.css" th:href="@{/css/user-style.css}" />
+  <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo llamado "user-style.css".-->
+  <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <!--Esta es otra etiqueta de enlace que enlaza con una versión diferente del archivo CSS de Bootstrap que se carga desde una CDN (red de entrega de contenido). -->
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
+  <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo para un conjunto de iconos.-->
+  <link rel="shortcut icon" th:href="@{/sources/images/icon.webp}" type="image/webp" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+  <title>Portal de Estudio José de Alejandría</title>
+</head>
+
+<body>
+  <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+  <!--Se esta creando un parrafo el cual esta dando la bienvenida al usuario-->
+  <div class="hero">
+    <div class="container">
+      <h1>Bienvenido</h1>
+      <p><q>Si haces planes para un año, siembra arroz. Si los haces por dos lustros, planta árboles. Si los haces para
+          toda la vida, educa una persona.</q><br> Proverbio chino</p>
+    </div>
+  </div>
+  <section id="tools" class="container content">
+    <div class="container mt-5" th:if="${details == false}">
+      <table class="table table-bordered mt-3" id="tablaTareas">
+
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Titulo</th>
+            <th scope="col" class="text-center">Docente</th>
+            <th scope="col" class="text-center">Fecha de entrega</th>
+            <th scope="col" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="tarea : ${tareas}">
+            <td th:text="${tarea.titulo}">ND</td>
+            <td th:text="${nombreDocentes.get(tarea.docente)}">ND</td>
+            <td><span th:text="${tarea.fechaEntrega}"></span> <span th:text="${tarea.horaEntrega}"></span></td>
+            <td class="text-center"><a th:href="@{/user/estudiante/view/}+${tarea.id}+@{#tools}"
+                style="text-decoration: none; color:black;"><i class="fi fi-rr-info"></i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container mt-5" th:if="${details == true}">
+      <p class="fw-bold">Titulo: <span th:text="${tareaView.titulo}" class="fw-normal"></span></p>
+      <p class="fw-bold">Docente: <span th:text="${nombreDocentes.get(tareaView.docente)}" class="fw-normal"></span>
+      <p class="fw-bold">Descripción: <span th:text="${tareaView.descripcion}" class="fw-normal"></span></p>
+      <p class="fw-bold">Fecha de entrega: <span th:text="${tareaView.fechaEntrega}" class="fw-normal"></span></p>
+      <p class="fw-bold">Hora de entrega: <span th:text="${tareaView.horaEntrega}" class="fw-normal"></span></p>
+      <a class="btn btn-danger" th:href="@{/user/estudiante/back}">Volver</a>
+    </div>
+  </section>
+  <script src="js/jquery-3.6.4.min.js" th:src="@{/js/jquery-3.6.4.min.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script th:replace="~{fragments/navbar.html :: navbar_js}"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#tablaTareas").DataTable({
+        language: {
+          url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json",
+        },
+        lengthMenu: [
+          [5, 10, 15, 100],
+          [5, 10, 15, 100],
+        ],
+      });
+    });
+  </script>
+</body>
+
+</html>
