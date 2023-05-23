@@ -53,35 +53,62 @@
                         <div class="form-floating mb-3">
                             <!--Inicia una sección con estilo para un control de formulario con un margen inferior de 3.-->
 
-                            <input type="number" class="form-control" id="cedula" required placeholder="1111111111"
-                                th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
-                                min="1" max="999999999999">
+                            <input type="number" class="form-control" id="cedulaEstudiante" required
+                                placeholder="1111111111" th:field="*{cedula}"
+                                onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1"
+                                max="999999999999">
                             <!--Crea un campo de entrada de número con un estilo de formulario, un ID de "cedula", requerido, un marcador de posición de "1111111111", un enlace a la variable de modelo "cedula" y un enfoque automático en la carga de la página.-->
-                            <label for="cedula">Documento de identidad</label>
-                            <div class="alert alert-info">
+                            <label for="cedulaEstudiante">Documento de identidad</label>
+                            <div class="alert alert-info" id="alertInfoDniEstudiante" style="display: none;">
                                 El documento de identidad de ser de formato: 1111111111
+                            </div>
+                            <div class="alert alert-danger" id="alertDangerDniEstudiante" style="display: none;">
+                                Ingrese un documento de identidad
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="nombre" placeholder="Pepito"
+                            <input type="text" class="form-control" id="nombreEstudiante" placeholder="Pepito"
                                 th:field="*{nombre}" required>
                             <label for="nombre">Nombre</label>
+                            <div class="alert alert-danger" id="alertDangerNombreEstudiante" style="display: none;">
+                                Ingrese el nombre
+                            </div>
                         </div>
                         <!-- Despues de la cedula repite para cada uno de los campos de entrada restantes, con diferentes atributos de "type", "id", "placeholder", "th:field", "label for", etc-->
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="apellido" placeholder="Pepo"
+                            <input type="text" class="form-control" id="apellidoEstudiante" placeholder="Pepo"
                                 th:field="*{apellido}" required>
                             <label for="apellido">Apellido</label>
+                            <div class="alert alert-danger" id="alertDangerApellidoEstudiante" style="display: none;">
+                                Ingrese el apellido
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="correo" placeholder="name@example.com"
-                                th:field="*{correo}" required>
+                            <input type="email" class="form-control" id="correoEstudiante"
+                                placeholder="name@example.com" th:field="*{correo}" required>
                             <label for="correo">Correo</label>
+                            <div class="alert alert-info" id="alertInfoCorreoEstudiante" style="display: none;">
+                                El correo debe ser de formato: example@example.com
+                            </div>
+                            <div class="alert alert-danger" id="alertDangerCorreoEstudiante" style="display: none;">
+                                Ingrese un correo
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="clave" placeholder="12345678"
+                            <input type="password" class="form-control" id="claveEstudiante" placeholder="12345678"
                                 th:field="*{clave}" required minlength="8" maxlength="12">
-                            <label for="clave">Clave</label>
+                            <label for="claveEstudiante">Clave</label>
+                            <div class="alert alert-info" style="display: none;" id="alertInfoClaveEstudiante">
+                                La clave no debe contener caracteres especiales, ni espacios en blanco.
+                                <br>
+                                La longitud minima es de 8 caracteres <span id="checkMinEstudiante"
+                                    style="visibility: hidden;"></span>
+                                <br>
+                                La longitud maxima es de 12 caracteres <span id="checkMaxEstudiante"></span>
+                            </div>
+                            <div class="alert alert-danger" id="alertDangerClaveEstudiante" style="display: none;">
+                                Ingrese una clave
+                            </div>
                         </div>
                         <br>
                         <div class="form-group">
@@ -95,32 +122,64 @@
                     <form th:action="@{/registro/admin/mod}" method="post" th:object="${usuarioMod}"
                         th:if="${modificarE} == true" onsubmit="validate(event)">
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="cedula" required placeholder="1111111111"
-                                th:field="*{cedula}" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
-                                min="1" max="999999999999">
+                            <input type="number" class="form-control" id="dniEstudianteMod" required
+                                placeholder="1111111111" th:field="*{cedula}"
+                                onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1"
+                                max="999999999999">
                             <label for="cedula">Cedula</label>
+                            <div class="alert alert-info" id="alertInfoDniEstudianteMod" style="display: none;">
+                                El documento de identidad de ser de formato: 1111111111
+                            </div>
+                            <div class="alert alert-danger" id="alertDangerDniEstudianteMod" style="display: none;">
+                                Ingrese un documento de identidad
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="nombre" placeholder="Pepito"
+                            <input type="text" class="form-control" id="nombreEstudianteMod" placeholder="Pepito"
                                 th:field="*{nombre}" required>
                             <label for="nombre">Nombre</label>
+                            <div class="alert alert-danger" id="alertDangerNombreEstudianteMod" style="display: none;">
+                                Ingrese el nombre
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="apellido" placeholder="Pepo"
+                            <input type="text" class="form-control" id="apellidoEstudianteMod" placeholder="Pepo"
                                 th:field="*{apellido}" required>
                             <label for="apellido">Apellido</label>
+                            <div class="alert alert-danger" id="alertDangerApellidoEstudianteMod"
+                                style="display: none;">
+                                Ingrese el apellido
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="correo" placeholder="name@example.com"
-                                th:field="*{correo}" required readonly onmousedown="return false;">
+                            <input type="email" class="form-control" id="correoEstudianteMod"
+                                placeholder="name@example.com" th:field="*{correo}" required readonly
+                                onmousedown="return false;">
                             <!--Elemento con clase form-floating mb-3que contiene un input elemento de tipo email con id correo, texto de marcador de posición " nombre@ejemplo.com " y atributo obligatorio. También tiene un th:fieldatributo con la expresión *{correo}que vincula el valor de entrada a la correopropiedad del usuarioregistroobjeto. El autofocusatributo establece el foco en esta entrada cuando se carga la página, y el disabledatributo deshabilita el campo de entrada para que no se pueda editar. También tiene un labelelemento que muestra la etiqueta "Correo" para esta entrada.-->
                             <label for="correo">Correo</label>
+                            <div class="alert alert-info" id="alertInfoCorreoEstudianteMod" style="display: none;">
+                                El correo debe ser de formato: example@example.com
+                            </div>
+                            <div class="alert alert-danger" id="alertDangerCorreoEstudianteMod" style="display: none;">
+                                Ingrese un correo
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="clave" placeholder="12345678"
+                            <input type="password" class="form-control" id="claveEstudianteMod" placeholder="12345678"
                                 th:field="*{clave}" required autofocus="autofocus" minlength="8" maxlength="12">
                             <!--Elemento con clase form-floating mb-3que contiene un inputelemento de tipo passwordcon id clave, texto de marcador de posición "12345678" y atributo obligatorio.-->
                             <label for="clave">Clave</label>
+                            <div class="alert alert-info" style="display: none;" id="alertInfoClaveEstudianteMod">
+                                La clave no debe contener caracteres especiales, ni espacios en blanco.
+                                <br>
+                                La longitud minima es de 8 caracteres <span id="checkMinEstudianteMod"
+                                    style="visibility: hidden;"></span>
+                                <br>
+                                La longitud maxima es de 12 caracteres <span id="checkMaxEstudianteMod"></span>
+                            </div>
+                            <div class="alert alert-danger" id="alertDangerClaveEstudianteMod" style="display: none;">
+                                Ingrese una clave
+                            </div>
                         </div>
                         <br>
                         <div class="form-group">

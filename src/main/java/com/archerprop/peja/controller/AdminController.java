@@ -95,10 +95,12 @@ public class AdminController {
      *         bandera "modificar" establecida en true
      */
     @GetMapping("/{correo}")
-    public String modificarUsuario(@PathVariable String correo, Model model) {
+    public String modificarUsuario(@PathVariable String correo, Model model, Principal principal) {
         System.out.println("correo: " + correo);
         Usuario usuarioM = usuarioService.buscarUsuario(correo);
-        String rol = usuarioM.getRoles().iterator().next().getName();
+        Usuario usuarioSesion = usuarioService.buscarUsuario(principal.getName());
+        String rol = usuarioSesion.getRoles().iterator().next().getName();
+        String rolM = usuarioM.getRoles().iterator().next().getName();
         List<Usuario> usuariosA = usuarioService.listarUsuariosAdmin();
         List<Usuario> usuariosD = usuarioService.listarUsuariosDocente();
         List<Usuario> usuariosE = usuarioService.listarUsuariosEstudiante();
@@ -109,14 +111,14 @@ public class AdminController {
         model.addAttribute("modificarA", false);
         model.addAttribute("modificarD", false);
         model.addAttribute("modificarE", false);
-        model.addAttribute("rol", "SUPERADMIN");
-        if (rol.equals("ADMIN")) {
+        model.addAttribute("rol", rol);
+        if (rolM.equals("ADMIN")) {
             model.addAttribute("modificarA", true);
             return "pages/admin";
-        } else if (rol.equals("DOCENTE")) {
+        } else if (rolM.equals("DOCENTE")) {
             model.addAttribute("modificarD", true);
             return "pages/admin";
-        } else if (rol.equals("ESTUDIANTE")) {
+        } else if (rolM.equals("ESTUDIANTE")) {
             model.addAttribute("modificarE", true);
             return "pages/admin";
         }

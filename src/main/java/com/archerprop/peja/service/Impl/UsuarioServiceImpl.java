@@ -12,8 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.archerprop.peja.dto.UsuarioRegistroDTO;
 import com.archerprop.peja.entity.Rol;
+import com.archerprop.peja.entity.Tareas;
 import com.archerprop.peja.entity.Usuario;
 import com.archerprop.peja.repository.RoleRepositorio;
+import com.archerprop.peja.repository.TareaRepositorio;
 import com.archerprop.peja.repository.UsuarioRepositorio;
 import org.springframework.transaction.annotation.Transactional;
 import com.archerprop.peja.service.UsuarioService;
@@ -34,6 +36,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private RoleRepositorio RoleRepositorio;
+
+    @Autowired
+    private TareaRepositorio tareaRepositorio;
 
     @Autowired
     private EntityManager entityManager;
@@ -205,4 +210,71 @@ public class UsuarioServiceImpl implements UsuarioService {
      // ocurrió algún error. Si ocurre algún error, imprime un mensaje de error
      // en la consola.
 
+    @Override
+    public Tareas guardar(Tareas tarea) {
+        if (tareaRepositorio.existsByTitulo(tarea.getTitulo()) || tarea.getTitulo() == null
+                || tarea.getDescripcion() == null || tarea.getDocente() == null) {
+            return null;
+        }
+        return tareaRepositorio.save(tarea);
+    }
+
+    @Override
+    public List<Tareas> listarTareas() {
+        return tareaRepositorio.findAll();
+    }
+
+    @Override
+    public List<Tareas> listarTareasPorDocente(Long idDocente) {
+        List<Tareas> tareas = tareaRepositorio.findAll();
+        List<Tareas> tareasDocente = tareas.stream()
+                .filter(tarea -> tarea.getDocente().equals(idDocente))
+                .collect(Collectors.toList());
+        return tareasDocente;
+    }
+
+    @Override
+    public Tareas buscarTarea(Long id) {
+        return tareaRepositorio.findById(id).orElse(null);
+    }
+
+    @Override
+    public Usuario buscarUsuarioPorCedula(Long cedula) {
+        return usuarioRepositorio.findByCedula(cedula);
+    }
+
+    @Override
+    public Tareas buscarTareaPorCedula(Long id) {
+        return tareaRepositorio.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean eliminarTarea(Tareas tarea) {
+        try {
+            tareaRepositorio.delete(tarea);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al eliminar la tarea: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean modificarTarea(Tareas tarea) {
+        Tareas t = tareaRepositorio.findByTitulo(tarea.getTitulo());
+        try {
+            Tareas tareaNueva = new Tareas(
+                    t.getId(),
+                    tarea.getTitulo(),
+                    tarea.getDescripcion(),
+                    tarea.getDocente(),
+                    tarea.getFechaEntrega(),
+                    tarea.getHoraEntrega());
+            tareaRepositorio.save(tareaNueva);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al modificar la tarea: " + e.getMessage());
+            return false;
+        }
+    }
 }

@@ -15,7 +15,7 @@
   <!--Esta es otra etiqueta de enlace que enlaza con una versión diferente del archivo CSS de Bootstrap que se carga desde una CDN (red de entrega de contenido). -->
   <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
   <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo para un conjunto de iconos.-->
-  <link rel="shortcut icon" th:href="@{sources/images/icon.webp}" type="image/webp" />
+  <link rel="shortcut icon" th:href="@{/sources/images/icon.webp}" type="image/webp" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
   <title>Portal de Estudio José de Alejandría</title>
@@ -62,7 +62,9 @@
       <li class="nav-item" role="presentation" th:if="${rol == 'SUPERADMIN'}">
         <button class="nav-link active" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin" type="button"
           role="tab" aria-controls="admin" aria-selected="true">
-          Administradores
+          Administradores <span th:value="${
+            rol
+          }"></span>
         </button>
       </li>
       <li class="nav-item" role="presentation" th:if="${rol == 'SUPERADMIN'}">
@@ -132,230 +134,8 @@
         ],
       });
     });
-
-    //Funciones para mostrar alertas de validación de campos de Administradores
-
-    //funcion focus y blur para el campo cedulaAdmin
-    var inputCedulaAdmin = document.getElementById("cedulaAdmin");
-    inputCedulaAdmin.onfocus = function () {
-      // desactivamos la alerta mientras hay focus en el input
-      var alertDangerDniAdmin = document.getElementById("alertDangerDniAdmin");
-      alertDangerDniAdmin.style.display = "none";
-
-      var alertInfoDniAdmin = document.getElementById("alertInfoDniAdmin");
-      alertInfoDniAdmin.style.display = "block";
-    };
-    inputCedulaAdmin.onblur = function () {
-      if (inputCedulaAdmin.value == "") {
-        var alertDangerDniAdmin = document.getElementById("alertDangerDniAdmin");
-        alertDangerDniAdmin.style.display = "block";
-      }
-      var alertInfoDniAdmin = document.getElementById("alertInfoDniAdmin");
-      alertInfoDniAdmin.style.display = "none";
-    };
-
-    //funcion focus y blur para el campo nombreAdmin
-    var inputNombreAdmin = document.getElementById("nombreAdmin");
-    inputNombreAdmin.onfocus = function () {
-      // desactivamos la alerta mientras hay focus en el input
-      var alertDangerNombreAdmin = document.getElementById(
-        "alertDangerNombreAdmin"
-      );
-      alertDangerNombreAdmin.style.display = "none";
-    };
-    inputNombreAdmin.onblur = function () {
-      if (inputNombreAdmin.value == "") {
-        var alertDangerNombreAdmin = document.getElementById(
-          "alertDangerNombreAdmin"
-        );
-        alertDangerNombreAdmin.style.display = "block";
-      }
-    };
-
-    //funcion focus y blur para el campo apellidoAdmin
-    var inputApellidoAdmin = document.getElementById("apellidoAdmin");
-    inputApellidoAdmin.onfocus = function () {
-      // desactivamos la alerta mientras hay focus en el input
-      var alertDangerApellidoAdmin = document.getElementById(
-        "alertDangerApellidoAdmin"
-      );
-      alertDangerApellidoAdmin.style.display = "none";
-    };
-    inputApellidoAdmin.onblur = function () {
-      if (inputApellidoAdmin.value == "") {
-        var alertDangerApellidoAdmin = document.getElementById(
-          "alertDangerApellidoAdmin"
-        );
-        alertDangerApellidoAdmin.style.display = "block";
-      }
-    };
-
-
-    //funcion focus y blur para el campo cedulaDocente
-    var inputCedulaDocente = document.getElementById("cedulaDocente");
-    inputCedulaDocente.onfocus = function () {
-      // desactivamos la alerta mientras hay focus en el input
-      var alertDangerDniDocente = document.getElementById(
-        "alertDangerDniDocente"
-      );
-      alertDangerDniDocente.style.display = "none";
-
-      var alertInfoDniDocente = document.getElementById("alertInfoDniDocente");
-      alertInfoDniDocente.style.display = "block";
-    };
-    inputCedulaDocente.onblur = function () {
-      if (inputCedulaDocente.value == "") {
-        var alertDangerDniDocente = document.getElementById(
-          "alertDangerDniDocente"
-        );
-        alertDangerDniDocente.style.display = "block";
-      }
-      var alertInfoDniDocente = document.getElementById("alertInfoDniDocente");
-      alertInfoDniDocente.style.display = "none";
-    };
-
-    //funcion focus y blur para el campo nombre
-    var inputNombre = document.getElementById("nombre");
-    inputNombre.onfocus = function () {
-      // desactivamos la alerta mientras hay focus en el input
-      var alertDangerNombre = document.getElementById("alertDangerNombre");
-      alertDangerNombre.style.display = "none";
-    };
-
-    inputNombre.onblur = function () {
-      if (inputNombre.value == "") {
-        var alertDangerNombre = document.getElementById("alertDangerNombre");
-        alertDangerNombre.style.display = "block";
-      }
-    };
-
-    //funcion focus y blur para el campo apellido
-    var inputApellido = document.getElementById("apellido");
-    inputApellido.onfocus = function () {
-      // desactivamos la alerta mientras hay focus en el input
-      var alertDangerApellido = document.getElementById(
-        "alertDangerApellido"
-      );
-      alertDangerApellido.style.display = "none";
-    };
-
-    inputApellido.onblur = function () {
-      if (inputApellido.value == "") {
-        var alertDangerApellido = document.getElementById(
-          "alertDangerApellido"
-        );
-        alertDangerApellido.style.display = "block";
-      }
-    };
-
-    //funcion focus y blur para el campo correo
-    var inputCorreo = document.getElementById("correo");
-    inputCorreo.onfocus = function () {
-      // desactivamos la alerta mientras hay focus en el input
-      var alertDangerCorreo = document.getElementById("alertDangerCorreo");
-      alertDangerCorreo.style.display = "none";
-
-      var alertInfoCorreo = document.getElementById("alertInfoCorreo");
-      alertInfoCorreo.style.display = "block";
-    };
-    inputCorreo.onblur = function () {
-      if (inputCorreo.value == "") {
-        var alertDangerCorreo = document.getElementById("alertDangerCorreo");
-        alertDangerCorreo.style.display = "block";
-      }
-      var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/;
-      var alertInfoCorreo = document.getElementById("alertInfoCorreo");
-      if (regex.test(inputCorreo.value) == false && alertDangerCorreo.style.display == "none") {
-        alertInfoCorreo.style.display = "block";
-      } else {
-        alertInfoCorreo.style.display = "none";
-      }
-    };
-
-    //funcion focus y blur para el campo clave
-    var inputClave = document.getElementById("clave");
-    inputClave.onfocus = function () {
-      // desactivamos la alerta mientras hay focus en el input
-      var alertDangerClave = document.getElementById("alertDangerClave");
-      alertDangerClave.style.display = "none";
-
-      var alertInfoClave = document.getElementById("alertInfoClave");
-      alertInfoClave.style.display = "block";
-
-      // colocar un chulo si la clave es mayor a 8 caracteres
-      inputClave.onkeyup = function () {
-        var alertInfoClave = document.getElementById("alertInfoClave");
-        if (inputClave.value.length >= 8) {
-          var checkMin = document.getElementById("checkMin");
-          checkMin.style.visibility = "visible";
-          checkMin.style.color = "green";
-          //verificado en codigo ascii
-          checkMin.textContent = String.fromCharCode(10004);
-        } else {
-          var checkMin = document.getElementById("checkMin");
-          checkMin.style.visibility = "hidden";
-        }
-        if (inputClave.value.length <= 12) {
-          var checkMax = document.getElementById("checkMax");
-          checkMax.style.visibility = "visible";
-          checkMax.style.color = "green";
-          //verificado en codigo ascii
-          checkMax.textContent = String.fromCharCode(10004);
-        } else {
-          var checkMax = document.getElementById("checkMax");
-          checkMax.style.visibility = "hidden";
-        }
-      };
-    };
-    inputClave.onblur = function () {
-      if (inputClave.value == "") {
-        var alertDangerClave = document.getElementById("alertDangerClave");
-        alertDangerClave.style.display = "block";
-      }
-      var alertInfoClave = document.getElementById("alertInfoClave");
-      alertInfoClave.style.display = "none";
-    };
-
-    //Funcion para mostrar y ocultar contraseña
-
-    function password_show_hide() {
-      var x = document.getElementById("clave");
-      var show_eye = document.getElementById("show_eye");
-      var hide_eye = document.getElementById("hide_eye");
-      hide_eye.classList.remove("d-none");
-      if (x.type === "password") {
-        x.type = "text";
-        show_eye.style.display = "none";
-        hide_eye.style.display = "block";
-      } else {
-        x.type = "password";
-        show_eye.style.display = "block";
-        hide_eye.style.display = "none";
-      }
-    }
-
-    //Funcion para quitar las alertas de validación de campos
-    function resetAlerts() {
-      var alertDangerDniAdmin = document.getElementById("alertDangerDniAdmin");
-      alertDangerDniAdmin.style.display = "none";
-
-      var alertDangerNombre = document.getElementById("alertDangerNombre");
-      alertDangerNombre.style.display = "none";
-
-      var alertDangerApellido = document.getElementById(
-        "alertDangerApellido"
-      );
-      alertDangerApellido.style.display = "none";
-
-      var alertDangerCorreo = document.getElementById("alertDangerCorreo");
-      alertDangerCorreo.style.display = "none";
-
-      var alertDangerClave = document.getElementById("alertDangerClave");
-      alertDangerClave.style.display = "none";
-
-      return true;
-    }
   </script>
+  <script th:src="@{/js/forms.js}"></script>
 </body>
 
 </html>

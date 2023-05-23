@@ -1,4 +1,3 @@
-$.getScript("jquery-3.6.0.min.js"); //cargar la librería de jQuery.
 
 const header = document.getElementById('header')// trae del HTML un atributo con la etiqueta de header y lo guarda en unacostante.
 const title = document.getElementById('title')// trae del HTML un atributo con la etiqueta de title y lo guarda en unacostante.

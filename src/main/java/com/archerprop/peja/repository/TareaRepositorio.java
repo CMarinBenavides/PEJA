@@ -7,14 +7,12 @@ import com.archerprop.peja.entity.Tareas;
 
 public interface TareaRepositorio extends JpaRepository<Tareas, Long> {
 
-    public abstract List<Tareas> findByNombre(String nombre);
+    public List<Tareas> findByDocente(Long docente);
 
-    public abstract List<Tareas> findByEstudiante(String estudiante);
+    public Tareas findById(long id);
 
-    public abstract List<Tareas> findByCurso(String curso);
+    public Tareas findByTitulo(String titulo);
 
-    public abstract List<Tareas> findByDocente(String docente);
-
-    public abstract List<Tareas> findByNombreAndDocente(String nombre, String docente);
+    public boolean existsByTitulo(String titulo);
 
 }

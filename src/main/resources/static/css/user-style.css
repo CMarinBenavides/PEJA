@@ -57,10 +57,13 @@ body {
   -ms-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
 }
-.nav.navbar ul li a:hover {
+
+.nav.navbar ul li a:hover:not(.btn.btn-outline-light) {
   font-size: 17px;
 }
-
+.nav.navbar ul li a.btn.btn-outline-light:hover {
+  color: #183446;
+}
 .navbar.active {
   background-color: #183446;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);

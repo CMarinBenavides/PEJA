@@ -4,15 +4,20 @@
 
 <head>
   <meta charset="UTF-8" />
+  <!--Esto especifica la codificación de caracteres utilizada en el documento, que es UTF-8 en este caso.-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/user-style.css" />
-  <link href="css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="css/card.css">
-  <script src="javascript/smooth-scroll.polyfills.min.js"></script>
-  <script>
-    <!--se está inicializando un objeto que hace uso de esa librería para habilitar el efecto de desplazamiento suave en todos los enlaces de la página que contengan un fragmento de URL que coincida con algún identificador de sección en la página.-->
-    var scroll = new SmoothScroll('a[href*="#"]');
-  </script>
+  <!--Esta metaetiqueta se usa para especificar cómo se debe representar el contenido en diferentes dispositivos.-->
+  <link rel="stylesheet" href="css/user-style.css" th:href="@{/css/user-style.css}" />
+  <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo llamado "user-style.css".-->
+  <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <!--Esta es otra etiqueta de enlace que enlaza con una versión diferente del archivo CSS de Bootstrap que se carga desde una CDN (red de entrega de contenido). -->
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
+  <!--Esta es una etiqueta de enlace que enlaza con un archivo CSS externo para un conjunto de iconos.-->
+  <link rel="shortcut icon" th:href="@{/sources/images/icon.webp}" type="image/webp" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
   <title>Portal de Estudio José de Alejandría</title>
 </head>
 
@@ -27,50 +32,58 @@
           toda la vida, educa una persona.</q><br> Proverbio chino</p>
     </div>
   </div>
-
   <section id="tools" class="container content">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-          role="tab" aria-controls="home" aria-selected="true">Tareas</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-          role="tab" aria-controls="profile" aria-selected="false">Calificaciones</button>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent" style="margin:30px 30px">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <div class="card">
-          <div class="card-header animated-bg" id="header">
-            <img src="sources/images/task.jpg" alt="tarea">
-          </div>
-          <!--El código está creando una sección de tarjeta de tarea que consta de un título con un enlace, una descripción y la información del profesor que la asignó. La sección también incluye una imagen de perfil del profesor. -->
-          <div class="card-content">
-            <h3 class="card-title animated-bg animated-bg-text" id="title">
-              <a href="#">nombre tarea</a>
-            </h3>
-            <p class="card-excerpt" id="excerpt">
-              descripcion
-            </p>
-            <div class="author">
-              <div class="profile-img animated-bg" id="profile_img"><img
-                  src="https://randomuser.me/api/portraits/men/45.jpg" alt=""></div>
-              <div class="author-info">
-                <strong class="animated-bg animated-bg-text" id="name">nombre profesor</strong>
-                <small class="animated-bg animated-bg-text" id="date">Oct 08, 2020</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">lista</div>
+    <div class="container mt-5" th:if="${details == false}">
+      <table class="table table-bordered mt-3" id="tablaTareas">
+
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Titulo</th>
+            <th scope="col" class="text-center">Docente</th>
+            <th scope="col" class="text-center">Fecha de entrega</th>
+            <th scope="col" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="tarea : ${tareas}">
+            <td th:text="${tarea.titulo}">ND</td>
+            <td th:text="${nombreDocentes.get(tarea.docente)}">ND</td>
+            <td><span th:text="${tarea.fechaEntrega}"></span> <span th:text="${tarea.horaEntrega}"></span></td>
+            <td class="text-center"><a th:href="@{/user/estudiante/view/}+${tarea.id}+@{#tools}"
+                style="text-decoration: none; color:black;"><i class="fi fi-rr-info"></i></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container mt-5" th:if="${details == true}">
+      <p class="fw-bold">Titulo: <span th:text="${tareaView.titulo}" class="fw-normal"></span></p>
+      <p class="fw-bold">Docente: <span th:text="${nombreDocentes.get(tareaView.docente)}" class="fw-normal"></span>
+      <p class="fw-bold">Descripción: <span th:text="${tareaView.descripcion}" class="fw-normal"></span></p>
+      <p class="fw-bold">Fecha de entrega: <span th:text="${tareaView.fechaEntrega}" class="fw-normal"></span></p>
+      <p class="fw-bold">Hora de entrega: <span th:text="${tareaView.horaEntrega}" class="fw-normal"></span></p>
+      <a class="btn btn-danger" th:href="@{/user/estudiante/back}">Volver</a>
     </div>
   </section>
-  <script src="javascript/jquery-3.6.0.min.js"></script>
-  <script src="/javascript/bootstrap.bundle.min.js"></script>
+  <script src="js/jquery-3.6.4.min.js" th:src="@{/js/jquery-3.6.4.min.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
   <script th:replace="~{fragments/navbar.html :: navbar_js}"></script>
-
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#tablaTareas").DataTable({
+        language: {
+          url: "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json",
+        },
+        lengthMenu: [
+          [5, 10, 15, 100],
+          [5, 10, 15, 100],
+        ],
+      });
+    });
+  </script>
 </body>
 
 </html>
